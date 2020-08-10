@@ -1,4 +1,4 @@
-# Swing CMS - Contact-Os - Conecta
+# Conecta
 Conecta, Progressive Web App
 
 -RXDBit

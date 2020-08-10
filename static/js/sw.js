@@ -16,8 +16,13 @@ const filesToPreCache = [
     { url: '/static/images/manifest/agent_f.svg', revision: '2020-08-10-1' },
     { url: '/static/images/manifest/bid_slogan.png', revision: '2020-08-10-1' },
     { url: '/static/images/manifest/contact-os.svg', revision: '2020-08-10-1' },
+    { url: '/static/images/manifest/gob_honduras.svg', revision: '2020-08-10-1' },
     { url: '/static/images/manifest/icon-512x512.png', revision: '2020-08-10-1' },
+    { url: '/static/images/manifest/inam.svg', revision: '2020-08-10-1' },
     { url: '/static/images/manifest/user_f.svg', revision: '2020-08-10-1' },
+    { url: '/static/images/manifest/user_f_01.svg', revision: '2020-08-10-1' },
+    { url: '/static/images/manifest/user_f_02.svg', revision: '2020-08-10-1' },
+    { url: '/static/images/manifest/user_f_03.svg', revision: '2020-08-10-1' },
     { url: '/static/images/manifest/wifi_antenna.svg', revision: '2020-08-10-1' },
     // Audio Files
     { url: '/static/media/audio/call_connected.mp3', revision: '2020-08-10-1' },

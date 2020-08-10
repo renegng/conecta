@@ -1,6 +1,6 @@
 {% extends 'layout_main-footer.html' %}
-{% block page_description %}Contact-Os, Welcome, Home, Inicio, Bienvenida{% endblock %}
-{% block page_title %}Contact-Os Welcome{% endblock %}
+{% block page_description %}Conecta, Welcome, Home, Inicio, Bienvenida{% endblock %}
+{% block page_title %}Conecta Bienvenid@{% endblock %}
 {% block body %}
 <main class="s-main-content mdc-top-app-bar--fixed-adjust">
     <div class="container-color-background">
@@ -9,40 +9,43 @@
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--align-middle container-justify-center">
                     <h2 class="mdc-typography--headline2 s-font-color-primary s-font-align-center">
-                        Contact-Os
+                        Conecta
                     </h2>
                     <h6 class="mdc-typography--headline6">
-                        Atención y servicios a un click de distancia.
+                        Orientación y atención para ti.
                     </h6>
                     <p class="mdc-typography--body1 s-font-color-secondary">
-                        Brindamos una plataforma moderna, segura y fácil de usar, con diferentes herramientas de
-                        comunicación, para que puedas entrar en <b>Contact-O</b> de manera digital y confidencial con
-                        personal calificado en diferentes servicios pensados para ti.
+                        CONECTA es una plataforma virtual de servicios para mujeres adultas y jóvenes que han
+                        experimentado cualquier tipo de violencia (doméstica, intrafamiliar, sexual por cualquier
+                        persona, laboral y comunitaria).
+                    </p>
+                    <p class="mdc-typography--body1 s-font-color-secondary">
+                        Nuestra misión garantizar la atención integral y autodeterminación de las sobrevivientes
+                        mediante servicios de asistencia legal, psicológica y social.
                     </p>
                     <p>
-                        <button class="mdc-button mdc-button--raised animate__animated animate__tada" aria-label="Try Chat" alt="Try Chat"
-                            data-action-type="redirect" data-action-val="/chat/">
+                        <button class="mdc-button mdc-button--raised animate__animated animate__tada"
+                            aria-label="Try Chat" alt="Try Chat" data-action-type="redirect" data-action-val="/chat/">
                             <div class="mdc-button__ripple"></div>
-                            <span class="mdc-button__label">Pruebalo ahora</span>
+                            <span class="mdc-button__label">Busco Orientación</span>
                         </button>
                     </p>
-                    <h6 class="mdc-typography--subtitle2">
-                        O, si ya posees una cuenta en la plataforma:
+                    <h6 class="mdc-typography--subtitle1">
+                        Si deseas <b>CREAR UNA CITA</b> o <b>ASISTIR A UNA CITA</b>, crea o accede a tu cuenta personal:
                     </h6>
                     <p>
                         <button id="loginButton" class="mdc-button mdc-button--outlined" aria-label="Login" alt="Login"
                             data-action-type="redirect" data-action-val="/login/">
                             <div class="mdc-button__ripple"></div>
-                            <span class="mdc-button__label">Inicia Sesión</span>
+                            <span class="mdc-button__label">Acceder Cuenta</span>
                         </button>
                     </p>
                 </div>
                 <div
                     class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
-                    <img class="resize-image-2fit-90"
-                        src="{{ url_for('static', filename='images/manifest/contact-os.svg') }}"
-                        alt="Logo Contact-Os" />
+                    <img style="transform: scaleX(-1);"
+                        src="{{ url_for('static', filename='images/manifest/user_f_01.svg') }}" alt="Logo Conecta" />
                 </div>
             </div>
         </div>
@@ -53,65 +56,130 @@
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--align-middle container-justify-center">
                     <h2 class="mdc-typography--headline2 s-font-color-secondary s-font-align-center">
-                        Diferentes formas para comunicarse
+                        Servicios
                     </h2>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
-                    <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">chat</i>
+                    <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">contact_support</i>
                     <p class="mdc-typography--body1">
-                        Mensajes por Chat
+                        Orientación General
                     </p>
                     <p class="mdc-typography--body2">
-                        Muchas veces es más eficiente y cómodo escribir tus pensamientos.
+                        Información GENERAL, atención de emergencia y referencia a los servicios del Módulo de Atención
+                        y Protección a los Derechos de la Mujer (MAPRODEM) de Ciudad Mujer y a otras instituciones de
+                        apoyo.
                     </p>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
-                    <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">phone</i>
+                    <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">gavel</i>
                     <p class="mdc-typography--body1">
-                        Llamada de Voz
+                        Asistencia Legal
                     </p>
                     <p class="mdc-typography--body2">
-                        Agenda una llamada de voz con un agente por medio de nuestra plataforma.
+                        Asesoría en diversas materias vinculadas a la violencia tales como divorcios, alimentos, patria
+                        potestad.
                     </p>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
-                    <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">voice_chat</i>
+                    <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">self_improvement</i>
                     <p class="mdc-typography--body1">
-                        Videollamada
+                        Apoyo Psicológico y Social
                     </p>
                     <p class="mdc-typography--body2">
-                        Una videollamada puede resultar en una experiencia mucho más personalizada.
+                        Atención en crisis, apoyo emocional, planes de seguridad y de vida, grupos de autoayuda; y
+                        seguimiento de casos.
                     </p>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-color-secondary">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--align-middle container-justify-center">
+                    <h2 class="mdc-typography--headline2 s-font-color-on-secondary s-font-align-center">
+                        Horarios de Atención
+                    </h2>
+                </div>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
+                <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">schedule</i>
+                <p class="mdc-typography--body1 s-font-color-on-secondary">
+                    Lunes a domingo de 8:00 am a 8:00 pm
+                </p>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
+                <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">warning</i>
+                <p class="mdc-typography--body1 s-font-color-on-secondary">
+                    Si tú y/u otras personas están en riesgo de muerte o daño grave, por favor, llama al 911.
+                </p>
             </div>
         </div>
     </div>
     <div class="container-color-background">
         <div class="mdc-layout-grid container-size-m">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                <div
+                    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
-                    <img class="resize-image-2fit-70"
-                        src="{{ url_for('static', filename='images/manifest/calendar.svg') }}" alt="Calendario" />
+                    <img src="{{ url_for('static', filename='images/manifest/user_f_02.svg') }}" alt="HowTo" />
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--align-middle container-justify-center">
                     <h2 class="mdc-typography--headline2 s-font-color-primary s-font-align-center">
-                        Reserva tu cita
+                        Como usar la plataforma
                     </h2>
-                    <h6 class="mdc-typography--headline6">
-                        Puedes reservar tu cita de servicio.
-                    </h6>
-                    <p class="mdc-typography--body1 s-font-color-secondary">
-                        Al registrarte en la plataforma, tendrás acceso a la opción de reservar cita en el día
-                        y hora que te sea más conveniente. Nos ajustamos a tu horario para estar en <b>Contact-O</b>.
+                    <div class="s-font-align-center">
+                        <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">phone</i>
+                        <p class="mdc-typography--body1">
+                            Llama o envía un mensaje a través del chat.
+                        </p>
+                    </div>
+                    <div class="s-font-align-center">
+                        <i class="material-icons s-font-size-l s-font-color-primary"
+                            aria-hidden="true">event_available</i>
+                        <p class="mdc-typography--body1">
+                            Solicita una cita registrándote en CONECTA usando tu teléfono o computador.
+                        </p>
+                        <p class="mdc-typography--body2">
+                            <button class="mdc-button mdc-button--outlined" aria-label="Register" alt="Register"
+                                data-action-type="redirect" data-action-val="/login/">
+                                <div class="mdc-button__ripple"></div>
+                                <span class="mdc-button__label">Registrate aquí</span>
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-color-secondary">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--align-middle container-justify-center">
+                    <h2 class="mdc-typography--headline2 s-font-color-on-secondary s-font-align-center">
+                        Beneficios
+                    </h2>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
+                    <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">money_off</i>
+                    <p class="mdc-typography--body1 s-font-color-on-secondary">
+                        La atención es gratuita.
                     </p>
-                    <p>
-                        <button class="mdc-button mdc-button--outlined" aria-label="Register" alt="Register"
-                        data-action-type="redirect" data-action-val="/login/">
-                            <div class="mdc-button__ripple"></div>
-                            <span class="mdc-button__label">Registrate aquí</span>
-                        </button>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
+                    <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">access_time</i>
+                    <p class="mdc-typography--body1 s-font-color-on-secondary">
+                        Las consultas duran entre 15-20 minutos, tiempo suficiente para discutir tu situación y desarrollar
+                        un plan de acción para atender tus necesidades.
+                    </p>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
+                    <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">connect_without_contact</i>
+                    <p class="mdc-typography--body1 s-font-color-on-secondary">
+                        Referencia a servicios de otras instituciones.
                     </p>
                 </div>
             </div>
@@ -120,8 +188,8 @@
 </main>
 {% endblock %}
 {% block bottombar %}
-<button id="floatingButton" class="mdc-fab mdc-fab--fixed mdc-fab--whatsapp"
-        aria-label="WhatsApp Contact Center" onclick="window.open('https://wa.me/911');">
+<button id="floatingButton" class="mdc-fab mdc-fab--fixed mdc-fab--whatsapp" aria-label="WhatsApp Contact Center"
+    onclick="window.open('https://wa.me/50499993298');">
     <div class="mdc-fab__ripple"></div>
     <span class="mdc-fab__icon fa fa-whatsapp"></span>
 </button>
