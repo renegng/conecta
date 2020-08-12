@@ -52,7 +52,7 @@ body {
 }
 
 .s-main-content--extend-tab-color-primary {
-    background: linear-gradient(180deg, stv.$swing-theme-primary 20%, stv.$swing-theme-background 20%);
+    background: linear-gradient(180deg, stv.$swing-theme-secondary 20%, stv.$swing-theme-background 20%);
 }
 
 .s-footer {
@@ -242,6 +242,10 @@ body {
                 flex-direction: column;
                 flex-shrink: 0;
                 margin: 1rem;
+
+                span {
+                    margin-bottom: 0.75rem;
+                }
             }
 
             .container-chat--body-message-reversed {
@@ -466,6 +470,12 @@ body {
     width: 100%;
 }
 
+.container-color-landingpage {
+    background: linear-gradient(180deg, #853a8e 25%, #f0f5ff 90%);
+    display: block;
+    width: 100%;
+}
+
 .container-color-secondary {
     background: stv.$swing-theme-secondary;
     display: block;
@@ -496,6 +506,15 @@ body {
 
 .container-justify-center {
     justify-self: center;
+}
+
+.container-landingpage-sponsors {
+    img {
+        margin: 0rem 1rem;
+        max-height: 25%;
+        max-width: 25%;
+        padding: 1rem 0rem;
+    }
 }
 
 .container-parallax {
@@ -557,6 +576,10 @@ body {
     color: stv.$swing-theme-on-secondary;
 }
 
+.s-font-family-lato {
+    font-family: stv.$swing-typography-parallax-font-family;
+}
+
 .s-font-size-xl {
     font-size: 8rem;
 }
@@ -570,6 +593,26 @@ body {
 }
 
 /* Image styles */
+
+.s-icon-color-email {
+    color: #ff9932 !important;
+}
+
+.s-icon-color-facebook {
+    color: #3B5998 !important;
+}
+
+.s-icon-color-linkedin {
+    color: #0077B5 !important;
+}
+
+.s-icon-color-twitter {
+    color: #1DA1F2 !important;
+}
+
+.s-icon-color-whatsapp {
+    color: #25d366 !important;
+}
 
 .resize-image-2fit-90 {
     max-height: 90%;

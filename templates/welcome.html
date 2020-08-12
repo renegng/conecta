@@ -1,25 +1,30 @@
-{% extends 'layout_main-footer.html' %}
+{% extends 'layout_main-footer_topbar.html' %}
 {% block page_description %}Conecta, Welcome, Home, Inicio, Bienvenida{% endblock %}
 {% block page_title %}Bienvenid@ a Conecta{% endblock %}
 {% block body %}
 <main class="s-main-content mdc-top-app-bar--fixed-adjust">
-    <div class="container-color-background">
+    <div class="container-color-landingpage">
         <div class="mdc-layout-grid container-size-l">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center"
+                            style="grid-row: span 2;">
+                    <img src="{{ url_for('static', filename='images/manifest/user_f_01.svg') }}" alt="Logo Conecta" />
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--align-middle container-justify-center">
-                    <h2 class="mdc-typography--headline2 s-font-color-primary s-font-align-center">
-                        Conecta
-                    </h2>
-                    <h6 class="mdc-typography--headline6">
-                        Orientación y atención para ti.
-                    </h6>
-                    <p class="mdc-typography--body1 s-font-color-secondary">
+                    <div class="mdc-typography--headline5 s-font-color-on-primary">
+                        ¿QUÉ ES?
+                    </div>
+                    <div class="mdc-typography--headline2 s-font-color-on-primary s-font-family-lato">
+                        CONECTA
+                    </div>
+                    <p class="mdc-typography--body1 s-font-color-on-primary">
                         CONECTA es una plataforma virtual de servicios para mujeres adultas y jóvenes que han
                         experimentado cualquier tipo de violencia (doméstica, intrafamiliar, sexual por cualquier
                         persona, laboral y comunitaria).
                     </p>
-                    <p class="mdc-typography--body1 s-font-color-secondary">
+                    <p class="mdc-typography--body1 s-font-color-on-primary">
                         Nuestra misión garantizar la atención integral y autodeterminación de las sobrevivientes
                         mediante servicios de asistencia legal, psicológica y social.
                     </p>
@@ -31,40 +36,41 @@
                         </button>
                     </p>
                     <h6 class="mdc-typography--subtitle1">
-                        Si deseas <b>CREAR UNA CITA</b> o <b>ASISTIR A UNA CITA</b>, crea o accede a tu cuenta personal:
+                        Si deseas <b>ASISTIR A UNA CITA</b> o <b>CREAR UNA CITA</b>, crea o accede a tu cuenta personal:
                     </h6>
                     <p>
                         <button id="loginButton" class="mdc-button mdc-button--outlined" aria-label="Login" alt="Login"
                             data-action-type="redirect" data-action-val="/login/">
                             <div class="mdc-button__ripple"></div>
-                            <span class="mdc-button__label">Acceder Cuenta</span>
+                            <span class="mdc-button__label">Ingresa por aquí</span>
                         </button>
                     </p>
                 </div>
-                <div
-                    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
-                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
-                    <img style="transform: scaleX(-1);"
-                        src="{{ url_for('static', filename='images/manifest/user_f_01.svg') }}" alt="Logo Conecta" />
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center
+                            container-landingpage-sponsors">
+                    <img src="../static/images/manifest/bid_slogan.png" alt="Logo BID" />
+                    <img src="../static/images/manifest/inam.png" alt="Logo INAM" />
+                    <img src="../static/images/manifest/ciudadmujer_h.png" alt="Logo Ciudad Mujer" />
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-color-surface">
+    <div class="container-color-background">
         <div class="mdc-layout-grid container-size-m">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--align-middle container-justify-center">
-                    <h2 class="mdc-typography--headline2 s-font-color-secondary s-font-align-center">
+                    <h2 class="mdc-typography--headline2 s-font-color-secondary s-font-align-center s-font-family-lato">
                         Servicios
                     </h2>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
                     <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">contact_support</i>
-                    <p class="mdc-typography--body1">
+                    <p class="mdc-typography--headline6 s-font-color-secondary">
                         Orientación General
                     </p>
-                    <p class="mdc-typography--body2">
+                    <p class="mdc-typography--body2 s-font-color-secondary">
                         Información GENERAL, atención de emergencia y referencia a los servicios del Módulo de Atención
                         y Protección a los Derechos de la Mujer (MAPRODEM) de Ciudad Mujer y a otras instituciones de
                         apoyo.
@@ -72,20 +78,20 @@
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
                     <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">gavel</i>
-                    <p class="mdc-typography--body1">
+                    <p class="mdc-typography--headline6 s-font-color-secondary">
                         Asistencia Legal
                     </p>
-                    <p class="mdc-typography--body2">
+                    <p class="mdc-typography--body2 s-font-color-secondary">
                         Asesoría en diversas materias vinculadas a la violencia tales como divorcios, alimentos, patria
                         potestad.
                     </p>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
                     <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">self_improvement</i>
-                    <p class="mdc-typography--body1">
+                    <p class="mdc-typography--headline6 s-font-color-secondary">
                         Apoyo Psicológico y Social
                     </p>
-                    <p class="mdc-typography--body2">
+                    <p class="mdc-typography--body2 s-font-color-secondary">
                         Atención en crisis, apoyo emocional, planes de seguridad y de vida, grupos de autoayuda; y
                         seguimiento de casos.
                     </p>
@@ -94,40 +100,43 @@
         </div>
     </div>
     <div class="container-color-secondary">
-        <div class="mdc-layout-grid container-size-s">
+        <div class="mdc-layout-grid container-size-m">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--align-middle container-justify-center">
-                    <h2 class="mdc-typography--headline2 s-font-color-on-secondary s-font-align-center">
+                    <h2 class="mdc-typography--headline2 s-font-color-on-secondary s-font-align-center s-font-family-lato">
                         Horarios de Atención
                     </h2>
+                    <div class="s-font-align-center">
+                        <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">schedule</i>
+                        <p class="mdc-typography--body1 s-font-color-on-secondary">
+                            Lunes a domingo de 8:00 am a 8:00 pm
+                        </p>
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
+                        <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">warning</i>
+                        <p class="mdc-typography--body1 s-font-color-on-secondary">
+                            Si tú y/u otras personas están en riesgo de muerte o daño grave, por favor, llama al 911.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
-                <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">schedule</i>
-                <p class="mdc-typography--body1 s-font-color-on-secondary">
-                    Lunes a domingo de 8:00 am a 8:00 pm
-                </p>
-            </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
-                <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">warning</i>
-                <p class="mdc-typography--body1 s-font-color-on-secondary">
-                    Si tú y/u otras personas están en riesgo de muerte o daño grave, por favor, llama al 911.
-                </p>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
+                    <img src="{{ url_for('static', filename='images/manifest/user_f_02.svg') }}" alt="Horario" />
+                </div>
             </div>
         </div>
     </div>
-    <div class="container-color-background">
+    <div class="container-color-surface">
         <div class="mdc-layout-grid container-size-m">
             <div class="mdc-layout-grid__inner">
-                <div
-                    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
-                    <img src="{{ url_for('static', filename='images/manifest/user_f_02.svg') }}" alt="HowTo" />
+                    <img src="{{ url_for('static', filename='images/manifest/user_f_03.svg') }}" alt="How To" />
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--align-middle container-justify-center">
-                    <h2 class="mdc-typography--headline2 s-font-color-primary s-font-align-center">
+                    <h2 class="mdc-typography--headline2 s-font-color-primary s-font-align-center s-font-family-lato">
                         Como usar la plataforma
                     </h2>
                     <div class="s-font-align-center">
@@ -135,6 +144,14 @@
                         <p class="mdc-typography--body1">
                             Llama o envía un mensaje a través del chat.
                         </p>
+                        <p class="mdc-typography--body2">
+                            <button class="mdc-button mdc-button--raised animate__animated animate__tada"
+                                    aria-label="Try Chat" alt="Try Chat" data-action-type="redirect" data-action-val="/chat/">
+                                <div class="mdc-button__ripple"></div>
+                                <span class="mdc-button__label">Habla con nosotros</span>
+                            </button>
+                        </p>
+                        <br/>
                     </div>
                     <div class="s-font-align-center">
                         <i class="material-icons s-font-size-l s-font-color-primary"
@@ -159,7 +176,7 @@
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--align-middle container-justify-center">
-                    <h2 class="mdc-typography--headline2 s-font-color-on-secondary s-font-align-center">
+                    <h2 class="mdc-typography--headline2 s-font-color-on-secondary s-font-align-center s-font-family-lato">
                         Beneficios
                     </h2>
                 </div>

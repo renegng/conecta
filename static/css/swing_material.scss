@@ -311,6 +311,7 @@
 
 /* Top app bar */
 .mdc-top-app-bar {
+    @include top-app-bar.fill-color(stv.$swing-theme-secondary);
     position: absolute;
 
     .mdc-top-app-bar__title {

@@ -1,6 +1,6 @@
 {% extends 'layout_main-drawer_footer_topbar.html' %}
-{% block page_description %}Contact-Os Chat, Mensajes de Texto por Chat, Mensajes{% endblock %}
-{% block page_title %}Contact-Os Chat{% endblock %}
+{% block page_description %}Conecta Chat, Mensajes de Texto por Chat, Mensajes{% endblock %}
+{% block page_title %}Conecta Chat{% endblock %}
 {% block body %}
 <main class="s-main-content s-main-content--extend-tab-color-primary mdc-top-app-bar--fixed-adjust">
     <div class="container-avcalls container--hidden">
@@ -70,7 +70,7 @@
                             <section class="container-chat--topbar-info">
                                 <div class="container-chat--topbar-info-pic">
                                     <img id="chat-pic" src="{{ url_for('static', filename='images/manifest/wifi_antenna.svg') }}"
-                                        alt="Logo Contact-Os" />
+                                        alt="Logo Conecta" />
                                 </div>
                                 <div class="container-chat--topbar-info-data">
                                     <span class="container-chat--topbar-info-data-name mdc-typography--subtitle2">
@@ -86,17 +86,29 @@
                             </section>
                         </header>
                     </div>
-                    <div
-                        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet
                                 mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle container-chat--body">
                         <div class="container-chat--body-messages">
                             <p class="container-chat--body-message-auto s-font-align-center">
                                 <span class="mdc-typography--caption s-font-color-secondary">
-                                    Bienvenid@
+                                    ¡Hola!
                                 </span>
                                 <span class="mdc-typography--caption s-font-color-secondary">
-                                    Esperanos unos instantes en lo que una de nuestras agentes se conecta para
-                                    atenderte.
+                                    Gracias por comunicarte con CONECTA. Te contestaremos tan pronto como sea posible.
+                                </span>
+                                <span class="mdc-typography--caption s-font-color-secondary">
+                                    Durante nuestro horario de 8:00 am a 8:00 pm respondemos en unos 10-15 minutos.
+                                </span>
+                                <span class="mdc-typography--caption s-font-color-secondary">
+                                    Los mensajes recibidos después de este horario serán contestados a partir de las 8:00 am
+                                    del siguiente día.
+                                </span>
+                                <span class="mdc-typography--caption s-font-color-secondary">
+                                    Si tienes información adicional que consideras puede ayudarnos a asistirte mejor,
+                                    compártela por esta vía.
+                                </span>
+                                <span class="mdc-typography--caption s-font-color-secondary">
+                                    No aceptamos fotografías.
                                 </span>
                                 <div id="s-loader-chat" class="s-loader">
                                     <div class="s-loader-bounce1"></div>
@@ -106,8 +118,7 @@
                             </p>
                         </div>
                     </div>
-                    <div
-                        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet
                                 mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle container-chat--footer">
                         <section class="container-chat--footer-input">
                             <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--disabled">

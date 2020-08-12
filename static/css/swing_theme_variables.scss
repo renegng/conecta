@@ -12,13 +12,13 @@ $swing-typography-parallax-font-family: "Lato", sans-serif !default;
 
 /*  Primary colors ($swing-theme-primary) map to components such as app bars and buttons, 
     while secondary colors ($swing-theme-secondary) are used as accents on components such as FABs and selection controls. */
-$swing-theme-primary: #141e44 !default;
-$swing-theme-secondary: #853a8e !default;
+$swing-theme-primary: #853a8e !default;
+$swing-theme-secondary: #002b6a !default;
 
 /*  Theme background ($swing-theme-background) appears behind scrollable content.
     Surface color ($swing-theme-surface) is mapped to the surface of components such as cards, sheets, and menus. 
     Error color ($swing-theme-error) is used to indicate an error state for components such as text fields provided with inaccurate input. */
-$swing-theme-background: #edf3ff !default;
+$swing-theme-background: #f0f5ff !default;
 $swing-theme-surface: #f5f5f6 !default;
 $swing-theme-error: #b00020 !default;
 
