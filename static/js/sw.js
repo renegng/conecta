@@ -6,9 +6,9 @@ const filesToPreCache = [
     // Web pages
     { url: '/', revision: '2020-08-12-3' },
     { url: '/acercade/', revision: '2020-08-12-2' },
-    { url: '/chat/', revision: '2020-08-12-2' },
+    { url: '/chat/', revision: '2020-08-12-3' },
     { url: '/chat/admin/', revision: '2020-08-12-1' },
-    { url: '/chat/home/', revision: '2020-08-12-2' },
+    { url: '/chat/home/', revision: '2020-08-12-3' },
     { url: '/login/', revision: '2020-08-12-1' },
     { url: '/politicaprivacidad/', revision: '2020-08-12-1' },
     { url: '/terminosdelservicio/', revision: '2020-08-12-1' },
