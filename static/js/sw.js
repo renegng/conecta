@@ -4,7 +4,7 @@
 
 const filesToPreCache = [
     // Web pages
-    { url: '/', revision: '2020-08-12-3' },
+    { url: '/', revision: '2020-08-12-4' },
     { url: '/acercade/', revision: '2020-08-12-2' },
     { url: '/chat/', revision: '2020-08-12-3' },
     { url: '/chat/admin/', revision: '2020-08-12-1' },
@@ -12,7 +12,7 @@ const filesToPreCache = [
     { url: '/login/', revision: '2020-08-12-1' },
     { url: '/politicaprivacidad/', revision: '2020-08-12-1' },
     { url: '/terminosdelservicio/', revision: '2020-08-12-1' },
-    { url: '/welcome/', revision: '2020-08-12-3' },
+    { url: '/welcome/', revision: '2020-08-12-4' },
     // Images
     { url: '/static/images/manifest/agent_f.svg', revision: '2020-08-12-1' },
     { url: '/static/images/manifest/bid_slogan.png', revision: '2020-08-12-1' },
