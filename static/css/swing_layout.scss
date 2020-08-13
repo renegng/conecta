@@ -542,6 +542,12 @@ body {
     position: relative;
 }
 
+.container-size-xs {
+    margin: 0rem 10%;
+    min-height: 10vh;
+    position: relative;
+}
+
 /* Font Theming */
 
 .fa {
@@ -615,21 +621,25 @@ body {
 }
 
 .resize-image-2fit-90 {
+    margin: 1rem;
     max-height: 90%;
     max-width: 90%;
 }
 
 .resize-image-2fit-70 {
+    margin: 1rem;
     max-height: 70%;
     max-width: 70%;
 }
 
 .resize-image-2fit-50 {
+    margin: 1rem;
     max-height: 50%;
     max-width: 50%;
 }
 
 .resize-image-2fit-30 {
+    margin: 1rem;
     max-height: 30%;
     max-width: 30%;
 }

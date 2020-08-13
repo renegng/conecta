@@ -8,7 +8,7 @@
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center"
-                            style="grid-row: span 2;">
+                    style="grid-row: span 2;">
                     <img src="{{ url_for('static', filename='images/manifest/user_f_01.svg') }}" alt="Logo Conecta" />
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
@@ -20,13 +20,13 @@
                         CONECTA
                     </div>
                     <p class="mdc-typography--body1 s-font-color-on-primary">
-                        CONECTA es una plataforma virtual de servicios para mujeres adultas y jóvenes que han
-                        experimentado cualquier tipo de violencia (doméstica, intrafamiliar, sexual por cualquier
-                        persona, laboral y comunitaria).
+                        CONECTA es una plataforma digital de servicios para mujeres adultas y adolescentes que han
+                        experimentado cualquier situación de violencia (doméstica, maltrato familiar, sexual por
+                        cualquier persona, laboral y comunitaria).
                     </p>
                     <p class="mdc-typography--body1 s-font-color-on-primary">
-                        Nuestra misión garantizar la atención integral y autodeterminación de las sobrevivientes
-                        mediante servicios de asistencia legal, psicológica y social.
+                        Nuestra tarea es asegurar una atención completa a las mujeres, respetando sus decisiones,
+                        mediante los servicios de psicología, trabajo social y asesoría legal.
                     </p>
                     <p>
                         <button class="mdc-button mdc-button--raised animate__animated animate__tada"
@@ -36,22 +36,16 @@
                         </button>
                     </p>
                     <h6 class="mdc-typography--subtitle1">
-                        Si deseas <b>ASISTIR A UNA CITA</b> o <b>CREAR UNA CITA</b>, crea o accede a tu cuenta personal:
+                        Para <b>ASISTIR A UNA CITA</b> o <b>SOLICITAR UNA NUEVA CITA</b>, crea o accede a tu cuenta
+                        personal:
                     </h6>
                     <p>
-                        <button id="loginButton" class="mdc-button mdc-button--raised mdc-button--color-inverted" aria-label="Login" alt="Login"
-                            data-action-type="redirect" data-action-val="/login/">
+                        <button id="loginButton" class="mdc-button mdc-button--raised mdc-button--color-inverted"
+                            aria-label="Login" alt="Login" data-action-type="redirect" data-action-val="/login/">
                             <div class="mdc-button__ripple"></div>
                             <span class="mdc-button__label">Ingresa por aquí</span>
                         </button>
                     </p>
-                </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
-                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center
-                            container-landingpage-sponsors">
-                    <img src="../static/images/manifest/bid_slogan.png" alt="Logo BID" />
-                    <img src="../static/images/manifest/inam.png" alt="Logo INAM" />
-                    <img src="../static/images/manifest/ciudadmujer_h.png" alt="Logo Ciudad Mujer" />
                 </div>
             </div>
         </div>
@@ -71,7 +65,7 @@
                         Orientación General
                     </p>
                     <p class="mdc-typography--body2 s-font-color-secondary">
-                        Información GENERAL, atención de emergencia y referencia a los servicios del Módulo de Atención
+                        Información general, atención de emergencia y referencia a los servicios del Módulo de Atención
                         y Protección a los Derechos de la Mujer (MAPRODEM) de Ciudad Mujer y a otras instituciones de
                         apoyo.
                     </p>
@@ -137,21 +131,23 @@
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--align-middle container-justify-center">
                     <h2 class="mdc-typography--headline2 s-font-color-primary s-font-align-center s-font-family-lato">
-                        Como usar la plataforma
+                        Cómo usar la plataforma
                     </h2>
                     <div class="s-font-align-center">
-                        <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">phone</i>
+                        <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">chat</i>
                         <p class="mdc-typography--body1">
-                            Llama o envía un mensaje a través del chat.
+                            Si sufres algún tipo de violencia, estamos aquí para apoyarte. Tu información será anónima y
+                            confidencial. Envíanos un mensaje:
                         </p>
                         <p class="mdc-typography--body2">
                             <button class="mdc-button mdc-button--raised animate__animated animate__tada"
-                                    aria-label="Try Chat" alt="Try Chat" data-action-type="redirect" data-action-val="/chat/">
+                                aria-label="Try Chat" alt="Try Chat" data-action-type="redirect"
+                                data-action-val="/chat/">
                                 <div class="mdc-button__ripple"></div>
-                                <span class="mdc-button__label">Habla con nosotros</span>
+                                <span class="mdc-button__label">Haz click aquí</span>
                             </button>
                         </p>
-                        <br/>
+                        <br />
                     </div>
                     <div class="s-font-align-center">
                         <i class="material-icons s-font-size-l s-font-color-primary"
@@ -160,8 +156,9 @@
                             Solicita una cita registrándote en CONECTA usando tu teléfono o computador.
                         </p>
                         <p class="mdc-typography--body2">
-                            <button class="mdc-button mdc-button--raised mdc-button--color-inverted" aria-label="Register" alt="Register"
-                                data-action-type="redirect" data-action-val="/login/">
+                            <button class="mdc-button mdc-button--raised mdc-button--color-inverted"
+                                aria-label="Register" alt="Register" data-action-type="redirect"
+                                data-action-val="/login/">
                                 <div class="mdc-button__ripple"></div>
                                 <span class="mdc-button__label">Registrate aquí</span>
                             </button>
@@ -189,15 +186,36 @@
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
                     <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">access_time</i>
                     <p class="mdc-typography--body1 s-font-color-on-secondary">
-                        Las consultas duran entre 15-20 minutos, tiempo suficiente para discutir tu situación y desarrollar
-                        un plan de acción para atender tus necesidades.
+                        Las consultas duran entre 15-20 minutos, tiempo suficiente para discutir tu situación y desarrollar un plan de acción para atender tus necesidades.
                     </p>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
-                    <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">connect_without_contact</i>
+                    <i class="material-icons s-font-size-l s-font-color-primary"
+                        aria-hidden="true">connect_without_contact</i>
                     <p class="mdc-typography--body1 s-font-color-on-secondary">
                         Referencia a servicios de otras instituciones.
                     </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-color-surface">
+        <div class="mdc-layout-grid container-size-xs">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--align-middle container-justify-center">
+                    <h2 class="mdc-typography--headline2 s-font-color-primary s-font-align-center s-font-family-lato">
+                        Nuestros Aliados:
+                    </h2>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span mdc-layout-grid__cell--align-middle s-font-align-center">
+                    <img class="resize-image-2fit-50" src="../static/images/manifest/bid_slogan.png" alt="Logo BID" />
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span mdc-layout-grid__cell--align-middle s-font-align-center">
+                    <img class="resize-image-2fit-50" src="../static/images/manifest/inam.png" alt="Logo INAM" />
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span mdc-layout-grid__cell--align-middle s-font-align-center">
+                    <img class="resize-image-2fit-50" src="../static/images/manifest/ciudadmujer_h.png" alt="Logo Ciudad Mujer" />
                 </div>
             </div>
         </div>
