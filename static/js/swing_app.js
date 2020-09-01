@@ -821,6 +821,14 @@ var mdcFloatingLabels = [].map.call(document.querySelectorAll('.mdc-floating-lab
 });
 
 
+// Material Image List Open Image
+if (!isNull(document.querySelector('.mdc-image-list__image'))) {
+    Array.from(document.getElementsByClassName('mdc-image-list__image')).forEach((elem) => {
+        elem.addEventListener('click', () => (window.open(elem.getAttribute('src'))));
+    });
+}
+
+
 // Material Line Ripples
 var mdcLineRipples = [].map.call(document.querySelectorAll('.mdc-line-ripple'), function (el) {
     return new MDCLineRipple(el);

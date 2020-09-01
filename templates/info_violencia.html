@@ -1,0 +1,103 @@
+{% extends 'layout_main-drawer_footer_topbar.html' %}
+{% block page_description %}Conecta, Información sobre Violencia, Violencia{% endblock %}
+{% block page_title %}Información sobre Violencia{% endblock %}
+{% block body %}
+<main class="s-main-content mdc-top-app-bar--fixed-adjust">
+    <article class="s-article">
+        <div class="container-color-background">
+            <div class="mdc-layout-grid container-size-xs">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <div
+                            class="mdc-typography--headline2 s-font-color-primary s-font-align-center s-font-family-poppins">
+                            Información sobre Violencia
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-color-background">
+            <div class="mdc-layout-grid container-size-s">
+                <div class="mdc-layout-grid__inner">
+                    <div
+                        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <img src="{{ url_for('static', filename='images/manifest/user_f_08.svg') }}"
+                            class="resize-image-2fit-90" alt="Logo Seguridad" />
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <div class="mdc-typography--headline2 s-font-color-secondary s-font-family-poppins">
+                            Protocolos
+                        </div>
+                        <p class="mdc-typography--body1 s-font-color-on-background">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate nesciunt maxime harum
+                            adipisci accusantium ratione quisquam, non, totam molestias, in sunt quo eos? Suscipit
+                            eveniet placeat corrupti minus consequatur mollitia molestias totam tempora laboriosam,
+                            nihil omnis ut alias rem id molestiae ipsam dolorum magnam tenetur aut. Quo nam iste earum.
+                        </p>
+                        <p class="mdc-typography--body1 s-font-color-on-background">
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque rem nobis nihil asperiores
+                            ducimus recusandae optio saepe. Quam, sit odit.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-color-background">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div
+                        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <div class="mdc-card">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media mdc-card__media--16-9">
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/mqIfK0XDeyI"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen>
+                                    </iframe>
+                                </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Prevención COVID-19</div>
+                                <div class="mdc-typography--subtitle2">Prevención en el lugar de trabajo</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <div class="mdc-card">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media mdc-card__media--16-9">
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/3Ku2u50weVY"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen>
+                                    </iframe>
+                                </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">COVID-19</div>
+                                <div class="mdc-typography--subtitle2">La ciencia del COVID-19</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <div class="mdc-card">
+                            <a href="https://www.paho.org/es/covid-19-materiales-comunicacion" target="_blank">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="mdc-card__media">
+                                        <i class="material-icons s-font-color-primary"
+                                            aria-hidden="true">local_hospital</i>
+                                    </div>
+                                    <div class="mdc-typography--headline5 s-font-color-secondary">Prevención de la Violencia</div>
+                                    <div class="mdc-typography--subtitle2">Protocolo documentado</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</main>
+{% endblock %}

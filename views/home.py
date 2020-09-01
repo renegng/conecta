@@ -162,6 +162,12 @@ def _politicaprivacidad():
     return render_template('politicaprivacidad.html')
 
 
+@home.route('/recursos/')
+def _recursos():
+    app.logger.debug('** SWING_CMS ** - Recursos')
+    return render_template('recursos.html')
+
+
 @home.route('/sobrenosotros/')
 def _sobrenosotros():
     app.logger.debug('** SWING_CMS ** - Sobre Nosotros')
