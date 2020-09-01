@@ -15,12 +15,6 @@ def _index():
     return redirect(url_for('home._welcome'))
 
 
-@home.route('/acercade/')
-def _acercade():
-    app.logger.debug('** SWING_CMS ** - AcercaDe')
-    return render_template('acercade.html')
-
-
 @home.route('/chat/')
 def _chat():
     app.logger.debug('** SWING_CMS ** - Try Chat')
@@ -41,15 +35,32 @@ def _chat_home():
 
 @home.route('/components/')
 def _components():
-    app.logger.debug('** SWING_CMS ** - Welcome')
+    app.logger.debug('** SWING_CMS ** - Components')
     return render_template('components.html')
 
 
+@home.route('/coronavirus/')
+def _coronavirus():
+    app.logger.debug('** SWING_CMS ** - Coronavirus')
+    return render_template('coronavirus.html')
+
+
+@home.route('/dirservicios/')
+def _dirservicios():
+    app.logger.debug('** SWING_CMS ** - Directorio de Servicios')
+    return render_template('directorio_servicios.html')
+
+
 @home.route('/home/')
-# @login_required
 def _home():
     app.logger.debug('** SWING_CMS ** - Home')
     return render_template('acercade.html')
+
+
+@home.route('/infoviolencia/')
+def _infoviolencia():
+    app.logger.debug('** SWING_CMS ** - Informacion sobre Violencia')
+    return render_template('info_violencia.html')
 
 
 @home.route('/login/')
@@ -139,15 +150,27 @@ def _logoutuser():
         return jsonify({ 'status': 'error' })
 
 
+@home.route('/planseguridad/')
+def _planseguridad():
+    app.logger.debug('** SWING_CMS ** - Plan de Seguridad')
+    return render_template('plan_seguridad.html')
+
+
 @home.route('/politicaprivacidad/')
 def _politicaprivacidad():
-    app.logger.debug('** SWING_CMS ** - PoliticaPrivacidad')
+    app.logger.debug('** SWING_CMS ** - Politica Privacidad')
     return render_template('politicaprivacidad.html')
+
+
+@home.route('/sobrenosotros/')
+def _sobrenosotros():
+    app.logger.debug('** SWING_CMS ** - Sobre Nosotros')
+    return render_template('sobre_nosotros.html')
 
 
 @home.route('/terminosdelservicio/')
 def _terminosdelservicio():
-    app.logger.debug('** SWING_CMS ** - TerminosDelServicio')
+    app.logger.debug('** SWING_CMS ** - Terminos Del Servicio')
     return render_template('terminosdelservicio.html')
 
 

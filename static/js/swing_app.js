@@ -755,6 +755,18 @@ if (accountMenuButton != null) {
     document.querySelector('#accountMenu').addEventListener('MDCMenu:selected', evt => accountRedirect(evt));
 }
 
+var aidMenu = null;
+var aidMenuButton = null;
+if (!isNull(document.querySelector('#aidMenu'))) {
+    aidMenu = new MDCMenu(document.querySelector('#aidMenu'));
+    aidMenuButton = document.querySelector('#aidMenuButton');
+}
+if (aidMenuButton != null) {
+    aidMenuButton.addEventListener('click', () => (aidMenu.open = !aidMenu.open));
+    aidMenu.setAnchorCorner(Corner.BOTTOM_START);
+    document.querySelector('#aidMenu').addEventListener('MDCMenu:selected', evt => accountRedirect(evt));
+}
+
 var moreOptionMenu = null;
 var moreOptionMenuButton = null;
 if (!isNull(document.querySelector('#moreOptionsMenu'))) {

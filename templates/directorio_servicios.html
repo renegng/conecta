@@ -1,0 +1,78 @@
+{% extends 'layout_main-drawer_footer_topbar.html' %}
+{% block page_description %}Conecta, Directorio de Servicios{% endblock %}
+{% block page_title %}Directorio de Servicios{% endblock %}
+{% block body %}
+<main class="s-main-content mdc-top-app-bar--fixed-adjust">
+    <article class="s-article">
+        <div class="container-color-background">
+            <div class="mdc-layout-grid container-size-xs">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <div class="mdc-typography--headline2 s-font-color-primary s-font-align-center s-font-family-poppins">
+                            Directorio de Servicios
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-color-background">
+            <div class="mdc-layout-grid container-size-s">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <img src="{{ url_for('static', filename='images/manifest/user_f_03.svg') }}"
+                            alt="Logo Conecta" />
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <div class="mdc-typography--headline2 s-font-color-secondary s-font-family-poppins">
+                            Ponte en contacto
+                        </div>
+                        <p class="mdc-typography--body1 s-font-color-on-background">
+                            A continuación encontrarás una serie de directorios telefónicos con las diferentes oficinas
+                            e instituciones gubernamentales, ordenadas y divididas por municipio y departamento.
+                        </p>
+                        <p class="mdc-typography--body1 s-font-color-on-background">
+                            De esta manera siempre contaras con asistencia y apoyo a tu alcance, en tu dispositivo desde
+                            cualquier lugar.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-color-background">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <div class="mdc-card">
+                            <a href="https://drive.google.com/file/d/1_NOEiz6BJ8Ne3FPHXb99fyTNg52qgT46/view?usp=sharing" target="_blank">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="mdc-card__media">
+                                        <i class="material-icons s-font-color-primary" aria-hidden="true">contact_phone</i>
+                                    </div>
+                                    <div class="mdc-typography--headline5 s-font-color-secondary">Instituciones Gubernamentales</div>
+                                    <div class="mdc-typography--subtitle2">Por cabecera departamental</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <div class="mdc-card">
+                            <a href="https://drive.google.com/file/d/1Xy3Y69XydxjzBxyWSO7gR1QKHiVDpRmh/view?usp=sharing" target="_blank">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="mdc-card__media">
+                                        <i class="material-icons s-font-color-primary" aria-hidden="true">contact_phone</i>
+                                    </div>
+                                    <div class="mdc-typography--headline5 s-font-color-secondary">Oficinas Municipales de la Mujer</div>
+                                    <div class="mdc-typography--subtitle2">Por cabecera departamental</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</main>
+{% endblock %}

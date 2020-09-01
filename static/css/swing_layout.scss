@@ -45,6 +45,11 @@ body {
     position: relative;
 }
 
+.s-drawer {
+    width: 18rem;
+    border: none;
+}
+
 .s-main-content {
     display: flex;
     flex-wrap: wrap;
@@ -471,7 +476,7 @@ body {
 }
 
 .container-color-landingpage {
-    background: linear-gradient(180deg, #853a8e 25%, #f0f5ff 90%);
+    background: linear-gradient(180deg, #853a8e 50%, #f0f5ff 90%);
     display: block;
     width: 100%;
 }
@@ -567,6 +572,10 @@ body {
     color: #35ac19;
 }
 
+.s-font-color-yellow-titles {
+    color: #fab000;
+}
+
 .s-font-color-primary {
     color: stv.$swing-theme-primary;
 }
@@ -587,6 +596,11 @@ body {
     font-family: stv.$swing-typography-parallax-font-family;
 }
 
+.s-font-family-poppins {
+    font-family: stv.$swing-typography-secondary-font-family;
+    font-weight: bold;
+}
+
 .s-font-size-xl {
     font-size: 8rem;
 }
@@ -597,6 +611,10 @@ body {
 
 .s-font-size-m {
     font-size: 3rem;
+}
+
+.s-font-weight-bold {
+    font-weight: bold;
 }
 
 /* Image styles */

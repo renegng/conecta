@@ -1,8 +1,100 @@
-{% extends 'layout_main-footer_topbar.html' %}
+{% extends 'layout_main-drawer_footer_topbar.html' %}
 {% block page_description %}Conecta, Welcome, Home, Inicio, Bienvenida{% endblock %}
 {% block page_title %}Bienvenid@ a Conecta{% endblock %}
 {% block body %}
 <main class="s-main-content mdc-top-app-bar--fixed-adjust">
+    <!-- <div class="container-color-surface">
+        <div class="mdc-layout-grid container-size-xs">
+            <div class="mdc-layout-grid__inner">
+                <div
+                    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
+                    <div class="mdc-tab-bar" role="tablist">
+                        <div class="mdc-tab-scroller">
+                            <div class="mdc-tab-scroller__scroll-area">
+                                <div class="mdc-tab-scroller__scroll-content">
+                                    <button id="aidMenuButton" class="mdc-tab" role="tab" aria-selected="true"
+                                        tabindex="0">
+                                        <span class="mdc-tab__content">
+                                            <span class="mdc-tab__text-label s-font-weight-bold">Solicite Ayuda</span>
+                                        </span>
+                                        <span class="mdc-tab-indicator">
+                                            <span
+                                                class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                        </span>
+                                        <span class="mdc-tab__ripple"></span>
+                                    </button>
+                                    <button class="mdc-tab" role="tab" aria-selected="true" tabindex="1">
+                                        <span class="mdc-tab__content">
+                                            <span class="mdc-tab__text-label s-font-weight-bold">Información sobre
+                                                violencia</span>
+                                        </span>
+                                        <span class="mdc-tab-indicator">
+                                            <span
+                                                class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                        </span>
+                                        <span class="mdc-tab__ripple"></span>
+                                    </button>
+                                    <button class="mdc-tab" role="tab" aria-selected="true" tabindex="2">
+                                        <span class="mdc-tab__content">
+                                            <span class="mdc-tab__text-label s-font-weight-bold">Plan de
+                                                Seguridad</span>
+                                        </span>
+                                        <span class="mdc-tab-indicator">
+                                            <span
+                                                class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                        </span>
+                                        <span class="mdc-tab__ripple"></span>
+                                    </button>
+                                    <button class="mdc-tab" role="tab" aria-selected="true" tabindex="3">
+                                        <span class="mdc-tab__content">
+                                            <span class="mdc-tab__text-label s-font-weight-bold">Sobre Nosotros</span>
+                                        </span>
+                                        <span class="mdc-tab-indicator">
+                                            <span
+                                                class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                        </span>
+                                        <span class="mdc-tab__ripple"></span>
+                                    </button>
+                                    <button class="mdc-tab" role="tab" aria-selected="true" tabindex="4">
+                                        <span class="mdc-tab__content">
+                                            <span class="mdc-tab__text-label s-font-weight-bold">COVID 19</span>
+                                        </span>
+                                        <span class="mdc-tab-indicator">
+                                            <span
+                                                class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                        </span>
+                                        <span class="mdc-tab__ripple"></span>
+                                    </button>
+                                </div>
+                                <div id="aidMenu" class="mdc-menu mdc-menu-surface" tabindex="-1">
+                                    <ul class="mdc-list mdc-menu__items" role="menu" aria-hidden="true">
+                                        <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                            <span class="mdc-list-item__ripple"></span>
+                                            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">chat</i>
+                                            <span class="mdc-list-item__text">Chatea con nosotras</span>
+                                        </li>
+                                        <li class="mdc-list-item" role="menuitem" tabindex="1">
+                                            <span class="mdc-list-item__ripple"></span>
+                                            <i class="material-icons mdc-list-item__graphic"
+                                                aria-hidden="true">event_available</i>
+                                            <span class="mdc-list-item__text">Accede a tu cita</span>
+                                        </li>
+                                        <li class="mdc-list-item" role="menuitem" tabindex="1">
+                                            <span class="mdc-list-item__ripple"></span>
+                                            <i class="material-icons mdc-list-item__graphic"
+                                                aria-hidden="true">menu_book</i>
+                                            <span class="mdc-list-item__text">Directorios de servicios</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
     <div class="container-color-landingpage">
         <div class="mdc-layout-grid container-size-l">
             <div class="mdc-layout-grid__inner">
@@ -13,25 +105,27 @@
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--align-middle container-justify-center">
-                    <div class="mdc-typography--headline5 s-font-color-on-primary">
+                    <div class="mdc-typography--headline5 s-font-color-yellow-titles s-font-family-poppins">
                         ¿QUÉ ES
                     </div>
-                    <div class="mdc-typography--headline2 s-font-color-on-primary s-font-family-lato">
+                    <div class="mdc-typography--headline2 s-font-color-on-primary s-font-family-poppins">
                         CONECTA?
                     </div>
                     <p class="mdc-typography--body1 s-font-color-on-primary">
-                        CONECTA es una plataforma digital de servicios para mujeres que han experimentado cualquier tipo
-                        de violencia (doméstica, maltrato familiar, sexual, laboral o comunitaria).
+                        Es una plataforma digital de servicios para mujeres adultas y adolescentes que han experimentado
+                        cualquier situación de violencia, con el fín de asegurarles una atención integral, mediante los
+                        servicios de psicología, trabajo social y asesoría legal.
                     </p>
                     <p class="mdc-typography--body1 s-font-color-on-primary">
-                        Nuestra tarea es asegurar una atención completa a las mujeres adultas y adolescentes, respetando
-                        sus decisiones, mediante los servicios de psicología, trabajo social y asesoría legal.
+                        Si sufres algún tipo de violencia, estamos aquí para apoyarte. Tu información será anónima y
+                        confidencial. Envíanos un mensaje:
                     </p>
                     <p>
-                        <button class="mdc-button mdc-button--raised animate__animated animate__tada"
+                        <button
+                            class="mdc-button mdc-button--raised mdc-button--color-inverted animate__animated animate__tada"
                             aria-label="Try Chat" alt="Try Chat" data-action-type="redirect" data-action-val="/chat/">
                             <div class="mdc-button__ripple"></div>
-                            <span class="mdc-button__label">Busco Orientación</span>
+                            <span class="mdc-button__label">Chatea con nosotras</span>
                         </button>
                     </p>
                     <h6 class="mdc-typography--subtitle1">
@@ -39,30 +133,36 @@
                         personal:
                     </h6>
                     <p>
-                        <button id="loginButton" class="mdc-button mdc-button--raised mdc-button--color-inverted"
-                            aria-label="Login" alt="Login" data-action-type="redirect" data-action-val="/login/">
+                        <button id="loginButton" class="mdc-button mdc-button--raised" aria-label="Login" alt="Login"
+                            data-action-type="redirect" data-action-val="/login/">
                             <div class="mdc-button__ripple"></div>
                             <span class="mdc-button__label">Ingresa por aquí</span>
                         </button>
                     </p>
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet 
+                <div
+                    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
-                    <span class="mdc-typography--headline5 s-font-color-primary s-font-family-lato">
+                    <span class="mdc-typography--headline5 s-font-color-primary s-font-family-poppins">
                         Brindado por:
                     </span>
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet 
+                <div
+                    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet 
                             mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
-                    <img class="resize-image-2fit-70" src="../static/images/manifest/gobhn.png" alt="Logo Gobierno Honduras" />
+                    <img class="resize-image-2fit-90" src="../static/images/manifest/ciudadmujer.png"
+                        alt="Logo Ciudad Mujer" />
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet 
+                <div
+                    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet 
                             mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
-                    <img class="resize-image-2fit-70" src="../static/images/manifest/inam.png" alt="Logo INAM" />
+                    <img class="resize-image-2fit-90" src="../static/images/manifest/gobhn.png"
+                        alt="Logo Gobierno Honduras" />
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet 
+                <div
+                    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet 
                             mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
-                    <img class="resize-image-2fit-70" src="../static/images/manifest/ciudadmujer_h.png" alt="Logo Ciudad Mujer" />
+                    <img class="resize-image-2fit-90" src="../static/images/manifest/inam.png" alt="Logo INAM" />
                 </div>
             </div>
         </div>
@@ -72,23 +172,21 @@
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--align-middle container-justify-center">
-                    <h2 class="mdc-typography--headline2 s-font-color-secondary s-font-align-center s-font-family-lato">
-                        Servicios que Ofrecemos
+                    <h2 class="mdc-typography--headline2 s-font-color-secondary s-font-align-center s-font-family-poppins">
+                        Servicios que ofrecemos
                     </h2>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
-                    <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">contact_support</i>
+                    <i class="fas fa-chalkboard-teacher s-font-size-l s-font-color-primary" aria-hidden="true"></i>
                     <p class="mdc-typography--headline6 s-font-color-secondary">
                         Orientación General
                     </p>
                     <p class="mdc-typography--body2 s-font-color-secondary">
-                        Información general, atención de emergencia y referencia a los servicios del Módulo de Atención
-                        y Protección a los Derechos de la Mujer (MAPRODEM) de Ciudad Mujer y a otras instituciones de
-                        apoyo.
+                        Información general y referencia a los servicios de los módulos de Ciudad Mujer.
                     </p>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
-                    <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">gavel</i>
+                    <i class="fas fa-balance-scale s-font-size-l s-font-color-primary" aria-hidden="true"></i>
                     <p class="mdc-typography--headline6 s-font-color-secondary">
                         Asistencia Legal
                     </p>
@@ -98,7 +196,7 @@
                     </p>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
-                    <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">self_improvement</i>
+                    <i class="fas fa-hand-holding-heart s-font-size-l s-font-color-primary" aria-hidden="true"></i>
                     <p class="mdc-typography--headline6 s-font-color-secondary">
                         Apoyo Psicológico y Social
                     </p>
@@ -115,27 +213,26 @@
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--align-middle container-justify-center">
-                    <h2
-                        class="mdc-typography--headline2 s-font-color-on-secondary s-font-align-center s-font-family-lato">
-                        Horarios de Atención
+                    <h2 class="mdc-typography--headline2 s-font-color-yellow-titles s-font-align-center s-font-family-poppins">
+                        Horarios de atención
                     </h2>
                     <div class="s-font-align-center">
-                        <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">schedule</i>
+                        <i class="fas fa-clock s-font-size-l s-font-color-primary" aria-hidden="true"></i>
                         <p class="mdc-typography--body1 s-font-color-on-secondary">
-                            Lunes a domingo de 8:00 am a 8:00 pm
+                            Lunes a viernes de 8:00 am a 4:00 pm
                         </p>
                     </div>
                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
-                        <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">warning</i>
+                        <i class="fas fa-ambulance s-font-size-l s-font-color-primary" aria-hidden="true"></i>
                         <p class="mdc-typography--body1 s-font-color-on-secondary">
-                            Si tú u otras personas están en riesgo de muerte o daño grave, por favor, llama al 911.
+                            Si tú u otras personas están en riesgo de muerte o daño grave, por favor, <b>llama al 911</b>.
                         </p>
                     </div>
                 </div>
                 <div
                     class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
-                    <img src="{{ url_for('static', filename='images/manifest/user_f_02.svg') }}" alt="Horario" />
+                    <img src="{{ url_for('static', filename='images/manifest/user_f_05.svg') }}" alt="Horario" />
                 </div>
             </div>
         </div>
@@ -146,11 +243,11 @@
                 <div
                     class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
-                    <img src="{{ url_for('static', filename='images/manifest/user_f_03.svg') }}" alt="How To" />
+                    <img src="{{ url_for('static', filename='images/manifest/user_f_06.svg') }}" alt="How To" />
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--align-middle container-justify-center">
-                    <h2 class="mdc-typography--headline2 s-font-color-primary s-font-align-center s-font-family-lato">
+                    <h2 class="mdc-typography--headline2 s-font-color-primary s-font-align-center s-font-family-poppins">
                         Cómo usar la plataforma
                     </h2>
                     <div class="s-font-align-center">
@@ -194,26 +291,25 @@
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--align-middle container-justify-center">
                     <h2
-                        class="mdc-typography--headline2 s-font-color-on-secondary s-font-align-center s-font-family-lato">
+                        class="mdc-typography--headline2 s-font-color-yellow-titles s-font-align-center s-font-family-poppins">
                         Beneficios
                     </h2>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
                     <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">money_off</i>
                     <p class="mdc-typography--body1 s-font-color-on-secondary">
-                        La atención es gratuita.
+                        La atención es <b>gratuita</b>.
                     </p>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
-                    <i class="material-icons s-font-size-l s-font-color-primary" aria-hidden="true">access_time</i>
+                    <i class="fas fa-stopwatch-20 s-font-size-l s-font-color-primary" aria-hidden="true"></i>
                     <p class="mdc-typography--body1 s-font-color-on-secondary">
                         Las consultas duran 20 minutos, tiempo suficiente para discutir tu situación y
                         desarrollar un plan de acción para atender tus necesidades.
                     </p>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
-                    <i class="material-icons s-font-size-l s-font-color-primary"
-                        aria-hidden="true">connect_without_contact</i>
+                    <i class="fas fa-hands-helping s-font-size-l s-font-color-primary" aria-hidden="true"></i>
                     <p class="mdc-typography--body1 s-font-color-on-secondary">
                         Referencia a servicios de otras instituciones.
                     </p>
@@ -226,7 +322,7 @@
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--align-middle container-justify-center">
-                    <h2 class="mdc-typography--headline2 s-font-color-primary s-font-align-center s-font-family-lato">
+                    <h2 class="mdc-typography--headline2 s-font-color-primary s-font-align-center s-font-family-poppins">
                         Nuestros Aliados:
                     </h2>
                 </div>
@@ -237,6 +333,10 @@
                 <div
                     class="mdc-layout-grid__cell mdc-layout-grid__cell--span mdc-layout-grid__cell--align-middle s-font-align-center">
                     <img class="resize-image-2fit-50" src="../static/images/manifest/conatel.png" alt="Logo INAM" />
+                </div>
+                <div
+                    class="mdc-layout-grid__cell mdc-layout-grid__cell--span mdc-layout-grid__cell--align-middle s-font-align-center">
+                    <img class="resize-image-2fit-30" src="../static/images/manifest/911.png" alt="Logo INAM" />
                 </div>
             </div>
         </div>

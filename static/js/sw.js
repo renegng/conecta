@@ -4,37 +4,27 @@
 
 const filesToPreCache = [
     // Web pages
-    { url: '/', revision: '2020-08-13-1' },
-    { url: '/acercade/', revision: '2020-08-12-2' },
-    { url: '/chat/', revision: '2020-08-13-1' },
-    { url: '/chat/admin/', revision: '2020-08-12-1' },
-    { url: '/chat/home/', revision: '2020-08-13-1' },
-    { url: '/login/', revision: '2020-08-12-1' },
-    { url: '/politicaprivacidad/', revision: '2020-08-12-1' },
-    { url: '/terminosdelservicio/', revision: '2020-08-12-1' },
-    { url: '/welcome/', revision: '2020-08-13-1' },
+    { url: '/', revision: '2020-09-01-1' },
+    { url: '/chat/', revision: '2020-09-01-1' },
+    { url: '/login/', revision: '2020-09-01-1' },
+    { url: '/politicaprivacidad/', revision: '2020-09-01-1' },
+    { url: '/sobrenosotros/', revision: '2020-09-01-1' },
+    { url: '/terminosdelservicio/', revision: '2020-09-01-1' },
+    { url: '/welcome/', revision: '2020-09-01-1' },
     // Images
-    { url: '/static/images/manifest/agent_f.svg', revision: '2020-08-12-1' },
-    { url: '/static/images/manifest/bid_slogan.png', revision: '2020-08-12-1' },
-    { url: '/static/images/manifest/ciudadmujer_h.png', revision: '2020-08-12-1' },
-    { url: '/static/images/manifest/ciudadmujer_v.png', revision: '2020-08-12-1' },
-    { url: '/static/images/manifest/claro.png', revision: '2020-08-12-1' },
-    { url: '/static/images/manifest/conatel.png', revision: '2020-08-12-1' },
-    { url: '/static/images/manifest/contact-os.svg', revision: '2020-08-12-1' },
-    { url: '/static/images/manifest/gob_inam_h.png', revision: '2020-08-12-1' },
-    { url: '/static/images/manifest/gob_inam_v.png', revision: '2020-08-12-1' },
-    { url: '/static/images/manifest/icon-512x512.png', revision: '2020-08-12-1' },
-    { url: '/static/images/manifest/inam.png', revision: '2020-08-12-1' },
-    { url: '/static/images/manifest/tigo.png', revision: '2020-08-12-1' },
-    { url: '/static/images/manifest/user_f.svg', revision: '2020-08-12-1' },
-    { url: '/static/images/manifest/user_f_01.svg', revision: '2020-08-12-1' },
-    { url: '/static/images/manifest/user_f_02.svg', revision: '2020-08-12-1' },
-    { url: '/static/images/manifest/user_f_03.svg', revision: '2020-08-12-1' },
-    { url: '/static/images/manifest/wifi_antenna.svg', revision: '2020-08-12-1' },
+    { url: '/static/images/manifest/agent_f.svg', revision: '2020-09-01-1' },
+    { url: '/static/images/manifest/bid_slogan.png', revision: '2020-09-01-1' },
+    { url: '/static/images/manifest/conatel.png', revision: '2020-09-01-1' },
+    { url: '/static/images/manifest/icon-512x512.png', revision: '2020-09-01-1' },
+    { url: '/static/images/manifest/user_f.svg', revision: '2020-09-01-1' },
+    { url: '/static/images/manifest/user_f_01.svg', revision: '2020-09-01-1' },
+    { url: '/static/images/manifest/user_f_02.svg', revision: '2020-09-01-1' },
+    { url: '/static/images/manifest/user_f_03.svg', revision: '2020-09-01-1' },
+    { url: '/static/images/manifest/wifi_antenna.svg', revision: '2020-09-01-1' },
     // Audio Files
-    { url: '/static/media/audio/call_connected.mp3', revision: '2020-08-12-1' },
-    { url: '/static/media/audio/call_ended.mp3', revision: '2020-08-12-1' },
-    { url: '/static/media/audio/calling_ring.mp3', revision: '2020-08-12-1' }
+    { url: '/static/media/audio/call_connected.mp3', revision: '2020-09-01-1' },
+    { url: '/static/media/audio/call_ended.mp3', revision: '2020-09-01-1' },
+    { url: '/static/media/audio/calling_ring.mp3', revision: '2020-09-01-1' }
 ];
 
 // Importing Google's Workbox library for ServiceWorker implementation
@@ -52,7 +42,7 @@ workbox.core.clientsClaim();
 // Configuring Workbox
 workbox.core.setCacheNameDetails({
     prefix: 'conecta',
-    suffix: 'v2020-08-12-1',
+    suffix: 'v2020-09-01-1',
     precache: 'pre-cache',
     runtime: 'run-time',
     googleAnalytics: 'ga',
