@@ -4,13 +4,13 @@
 
 const filesToPreCache = [
     // Web pages
-    { url: '/', revision: '2020-09-01-2' },
-    { url: '/chat/', revision: '2020-09-01-2' },
-    { url: '/login/', revision: '2020-09-01-2' },
-    { url: '/politicaprivacidad/', revision: '2020-09-01-2' },
-    { url: '/sobrenosotros/', revision: '2020-09-01-2' },
-    { url: '/terminosdelservicio/', revision: '2020-09-01-2' },
-    { url: '/welcome/', revision: '2020-09-01-2' },
+    { url: '/', revision: '2020-09-03-1' },
+    { url: '/chat/', revision: '2020-09-03-1' },
+    { url: '/login/', revision: '2020-09-03-1' },
+    { url: '/politicaprivacidad/', revision: '2020-09-03-1' },
+    { url: '/sobrenosotros/', revision: '2020-09-03-1' },
+    { url: '/terminosdelservicio/', revision: '2020-09-03-1' },
+    { url: '/welcome/', revision: '2020-09-03-1' },
     // Images
     { url: '/static/images/manifest/agent_f.svg', revision: '2020-09-01-1' },
     { url: '/static/images/manifest/bid_slogan.png', revision: '2020-09-01-1' },
