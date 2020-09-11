@@ -1,6 +1,6 @@
 {% extends 'layout_main-drawer_footer_topbar.html' %}
-{% block page_description %}Conecta, Plan de Seguridad{% endblock %}
-{% block page_title %}Plan de Seguridad{% endblock %}
+{% block page_description %}Conecta, Autocuidado y Salud Emocional, Autocuidado, Salud, Emocional{% endblock %}
+{% block page_title %}Autocuidado y Salud Emocional{% endblock %}
 {% block body %}
 <main class="s-main-content mdc-top-app-bar--fixed-adjust">
     <article class="s-article">
@@ -11,7 +11,7 @@
                                 mdc-layout-grid__cell--align-middle container-justify-center">
                         <div
                             class="mdc-typography--headline2 s-font-color-primary s-font-align-center s-font-family-poppins">
-                            Plan de Seguridad
+                            Autocuidado y Salud Emocional
                         </div>
                     </div>
                 </div>
@@ -23,24 +23,25 @@
                     <div
                         class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
                                 mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
-                        <img src="{{ url_for('static', filename='images/manifest/user_f_08.svg') }}"
+                        <img src="{{ url_for('static', filename='images/manifest/user_f_04.svg') }}"
                             class="resize-image-2fit-90" alt="Logo Seguridad" />
                     </div>
                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
                                 mdc-layout-grid__cell--align-middle container-justify-center">
                         <p class="mdc-typography--body1 s-font-color-on-background">
-                            <b>Crea un plan de seguridad.</b>
+                            <b>Practica el autocuidado.</b>
                         </p>
                         <p class="mdc-typography--body1 s-font-color-on-background">
-                            Este es un plan práctico que incluye formas de mantenerte segura mientras estás en una
-                            relación abusiva de pareja, si planeas concluir esa relación o después de que ha terminado
-                            la relación. Tener un plan de seguridad establecido puede ayudarte a protegerte durante
-                            situaciones de riesgo o estresantes. Debido a que puede haber disponibilidad limitada de
-                            refugio debido a COVID-19, considera alternativas como quedarte con familiares o amigas (os)
-                            u otras opciones.
+                            Las situaciones de violencia, incluyendo durante la pandemia de COVID-19, causan mucha
+                            incertidumbre para las mujeres afectadas. Tratar de superar este momento mientras estás
+                            experimentando abuso puede ser realmente abrumador. <b>Tomar tiempo para tu salud y
+                            bienestar puede hacer una gran diferencia en cómo te sientes</b>. Aquí encontrarás
+                            información sobre cómo practicar el autocuidado y proteger tu salud mental mientras te
+                            mantienes segura.
                         </p>
                         <p class="mdc-typography--body1 s-font-color-on-background">
-                            <b>El personal de CONECTA te puede ayudar a elaborar un plan de seguridad.</b>
+                            <b>El personal de CONECTA te puede ayudar a elaborar un plan personalizado para
+                            recibir apoyo emocional y social.</b>
                         </p>
                     </div>
                 </div>
@@ -53,21 +54,27 @@
                                 mdc-layout-grid__cell--align-middle container-justify-center">
                         <h4
                             class="mdc-typography--headline4 s-font-color-primary s-font-align-center s-font-family-poppins">
-                            Plan de Seguridad
+                            Autocuidado y Salud Emocional
                         </h4>
                     </div>
-                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
-                        <div class="mdc-card">
-                            <a href="https://dvcncampus.org/pluginfile.php/3551/mod_data/content/2078/Plan%20de%20seguridad%20v2a.pdf" target="_blank">
-                                <div class="mdc-card__primary-action" tabindex="0">
-                                    <div class="mdc-card__media">
-                                        <i class="material-icons s-font-color-primary"
-                                            aria-hidden="true">description</i>
-                                    </div>
-                                    <div class="mdc-typography--headline5 s-font-color-secondary">Plan de seguridad para mujeres víctimas o en riesgo de cualquier tipo de violencia</div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <ul class="mdc-image-list mdc-image-list--masonry">
+                            <li class="mdc-image-list__item">
+                                <img class="mdc-image-list__image"
+                                    src="{{ url_for('static', filename='images/assets/articles/resources/autocuido_01.png') }}">
+                                <div class="mdc-image-list__supporting">
+                                    <span class="mdc-image-list__label">Autocuidado</span>
                                 </div>
-                            </a>
-                        </div>
+                            </li>
+                            <li class="mdc-image-list__item">
+                                <img class="mdc-image-list__image"
+                                    src="{{ url_for('static', filename='images/assets/articles/resources/saludemocional_01.png') }}">
+                                <div class="mdc-image-list__supporting">
+                                    <span class="mdc-image-list__label">Salud Emocional</span>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

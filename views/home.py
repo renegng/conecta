@@ -15,6 +15,12 @@ def _index():
     return redirect(url_for('home._welcome'))
 
 
+@home.route('/autocuidado/')
+def _autocuidado():
+    app.logger.debug('** SWING_CMS ** - Autocuidado')
+    return render_template('autocuidado.html')
+
+
 @home.route('/chat/')
 def _chat():
     app.logger.debug('** SWING_CMS ** - Try Chat')
@@ -55,12 +61,6 @@ def _dirservicios():
 def _home():
     app.logger.debug('** SWING_CMS ** - Home')
     return render_template('acercade.html')
-
-
-@home.route('/infoviolencia/')
-def _infoviolencia():
-    app.logger.debug('** SWING_CMS ** - Informacion sobre Violencia')
-    return render_template('info_violencia.html')
 
 
 @home.route('/login/')
@@ -148,6 +148,12 @@ def _logoutuser():
     except Exception as e:
         app.logger.error('** SWING_CMS ** - LogoutUser Error: {}'.format(e))
         return jsonify({ 'status': 'error' })
+
+
+@home.route('/materialesedu/')
+def _materialesedu():
+    app.logger.debug('** SWING_CMS ** - Materiales de Educacion')
+    return render_template('materiales_edu.html')
 
 
 @home.route('/planseguridad/')
