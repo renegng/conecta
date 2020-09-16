@@ -1,9 +1,11 @@
-import datetime
+import datetime, json
 
-from . import createJsonResponse, db
+from . import db, removeItemFromList, updateItemFromList
 from flask import current_app as app
-from flask import Blueprint
-from flask_socketio import SocketIO
+from flask import Blueprint, request, jsonify
+from flask_login import current_user
+from flask_socketio import SocketIO, join_room, leave_room
+from models.models import CatalogOperations, CatalogUserRoles, LogUserConnections, RTCOnlineUsers, User
 
 sio = Blueprint('sio', __name__, template_folder='templates', static_folder='static')
 
@@ -12,30 +14,242 @@ socketio = SocketIO()
 
 @socketio.on('connect')
 def _connect():
-    socketio.emit('userIsConnected', {'data': 'Connected'})
+    app.logger.debug('** SWING_CMS ** - SocketIO User Connected')
+    try:
+        # Retrieve User
+        user = current_user if current_user.is_authenticated else User.query.filter_by(uid='CON-Anonim@').first()
+
+        # Retrieve User IP Address
+        ip = request.remote_addr
+
+        # Add User to RTC Online Users List
+        cur_oul = RTCOnlineUsers.query.with_for_update().order_by(RTCOnlineUsers.id.desc()).first()
+        dt_now = datetime.datetime.utcnow()
+        rtc_user = {
+            'id': user.id,
+            'r_id': str(request.sid),
+            'userInfo': {
+                'activity': int(int(dt_now.strftime('%s%f'))/1000),
+                'assignedTo': None,
+                'ip': str(ip),
+                'name': user.name,
+                'photoURL': request.args.get('photoURL'),
+                'roles': user.get_user_roles(),
+                'status': 'Disponible'
+            }
+        }
+        
+        # Retrieve the user list depending on the user's role and Append User into the list
+        new_oul = cur_oul
+        if current_user.is_authenticated:
+            if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc']):
+                new_oul.userlist.get('rtc_online_users', {}).get('emp_users').append(rtc_user)
+            else:
+                new_oul.userlist.get('rtc_online_users', {}).get('reg_users').append(rtc_user)
+        else:
+            new_oul.userlist.get('rtc_online_users', {}).get('anon_users').append(rtc_user)
+
+        new_userlist = new_oul.userlist
+        
+        oper = CatalogOperations.query.filter_by(name_short='ins').first()
+        new_oul.userlist.get('rtc_online_users', {})['id'] = str(dt_now)
+        new_rtc_oul = RTCOnlineUsers()
+        new_rtc_oul.id = dt_now
+        new_rtc_oul.operation_id = oper.id
+        new_rtc_oul.userlist = new_userlist
+        db.session.add(new_rtc_oul)
+
+        cur_oul.enabled = False
+        db.session.add(cur_oul)
+
+        # Log User Connection
+        oper = CatalogOperations.query.filter_by(name_short='con').first()
+        log_uc = LogUserConnections()
+        log_uc.id = dt_now
+        log_uc.sid = request.sid
+        log_uc.user_id = user.id
+        log_uc.operation_id = oper.id
+        log_uc.ip_address = ip
+        db.session.add(log_uc)
+
+        db.session.commit()
+
+        # Add Employee to Room and Send User List
+        if current_user.is_authenticated:
+            if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc']):
+                join_room('CON-EMPS')
+        
+        socketio.emit('userIsConnected', { 'status' : 'success', 'id' : user.id, 'roles' : user.get_user_roles() }, room=request.sid)
+        socketio.emit('RTCUserList', new_userlist, room='CON-EMPS')
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - SocketIO User Connected Error: {}'.format(e))
+        return jsonify({ 'status': 'error' })
 
 
 @socketio.on('disconnect')
 def _disconnect():
-    socketio.emit('removeUserSocketID')
+    app.logger.debug('** SWING_CMS ** - SocketIO User Disconnected')
+    try:
+        # Retrieve User
+        user = current_user if current_user.is_authenticated else User.query.filter_by(uid='CON-Anonim@').first()
+
+        # Retrieve User IP Address
+        ip = request.remote_addr
+
+        # Remove User to RTC Online Users List
+        cur_oul = RTCOnlineUsers.query.with_for_update().order_by(RTCOnlineUsers.id.desc()).first()
+        dt_now = datetime.datetime.utcnow()
+        
+        # Retrieve the user list depending on the user's role and Remove User from List
+        new_oul = cur_oul
+        if current_user.is_authenticated:
+            if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc']):
+                removeItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('emp_users'), 'id', user.id)
+            else:
+                removeItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('reg_users'), 'id', user.id)
+        else:
+            removeItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('anon_users'), 'r_id', str(request.sid))
+        
+        new_userlist = new_oul.userlist
+
+        oper = CatalogOperations.query.filter_by(name_short='del').first()
+        new_oul.userlist.get('rtc_online_users', {})['id'] = str(dt_now)
+        new_rtc_oul = RTCOnlineUsers()
+        new_rtc_oul.id = dt_now
+        new_rtc_oul.operation_id = oper.id
+        new_rtc_oul.userlist = new_userlist
+        db.session.add(new_rtc_oul)
+
+        cur_oul.enabled = False
+        db.session.add(cur_oul)
+
+        # Log User Disconnection
+        oper = CatalogOperations.query.filter_by(name_short='dcon').first()
+        log_ud = LogUserConnections()
+        log_ud.id = dt_now
+        log_ud.sid = request.sid
+        log_ud.user_id = user.id
+        log_ud.operation_id = oper.id
+        log_ud.ip_address = ip
+        db.session.add(log_ud)
+
+        db.session.commit()
+
+        # Remove Employee to Room
+        if current_user.is_authenticated:
+            if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc']):
+                leave_room('CON-EMPS')
+        
+        socketio.emit('RTCUserList', new_userlist, room='CON-EMPS')
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - SocketIO User Disconnected Error: {}'.format(e))
+        return jsonify({ 'status': 'error' })
 
 
 @socketio.on('receiveSocketID')
 def _receiveSocketID(json):
-    app.logger.info('** SWING_CMS ** - SocketIO SocketID: {}'.format(json))
+    app.logger.debug('** SWING_CMS ** - SocketIO User Connected SocketID: {}'.format(json))
 
 
 @socketio.on('sendOfferToUser')
-def _sendOfferToUser(json):
-    socketio.emit('receiveInitiatorOffer', json)
+def _sendOfferToUser(js):
+    app.logger.debug('** SWING_CMS ** - SocketIO Send Offer To User: {}'.format(js))
+    try:
+        j = json.loads(js)
+        data = j['data']
+        r_id = j['r_id']
+        socketio.emit('receiveInitiatorOffer', { 'r_id' : request.sid, 'data' : data }, room=r_id)
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - SocketIO Send Offer To User Error: {}'.format(e))
+        return jsonify({ 'status': 'error' })
 
 
 @socketio.on('sendAnswerToUser')
-def _sendAnswerToUser(json):
-    socketio.emit('receiveReceiverAnswer', json)
+def _sendAnswerToUser(js):
+    app.logger.debug('** SWING_CMS ** - SocketIO Send Answer To User: {}'.format(js))
+    try:
+        j = json.loads(js)
+        data = j['data']
+        r_id = j['r_id']
+        socketio.emit('receiveReceiverAnswer', { 'r_id' : request.sid, 'data' : data }, room=r_id)
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - SocketIO Send Answer To User Error: {}'.format(e))
+        return jsonify({ 'status': 'error' })
+
+
+@socketio.on('updateUsersStatus')
+def _updateUsersStatus(js):
+    app.logger.debug('** SWING_CMS ** - SocketIO Update User Status : {}'.format(js))
+    try:
+        j = json.loads(js)
+        emp_id = j['e_id']
+        status = j['s_type']
+        usr_id = j['u_id']
+        usr_type = j['u_type']
+
+        # Update Users to RTC Online Users List
+        cur_oul = RTCOnlineUsers.query.with_for_update().order_by(RTCOnlineUsers.id.desc()).first()
+        dt_now = datetime.datetime.utcnow()
+
+        # Set status accordingly
+        new_emp_status = ''
+        new_usr_status = ''
+
+        if status == 'busy':
+            new_emp_status = 'Atendiendo'
+            new_usr_status = 'Atendido'
+        elif status == 'transferred':
+            usrsAssigned = 0
+            for anonUser in cur_oul.userlist.get('rtc_online_users', {}).get('anon_users'):
+                if anonUser.get('userInfo', {}).get('assignedTo') == emp_id:
+                    usrsAssigned += 1
+            
+            for regUser in cur_oul.userlist.get('rtc_online_users', {}).get('reg_users'):
+                if regUser.get('userInfo', {}).get('assignedTo') == emp_id:
+                    usrsAssigned += 1
+            
+            new_emp_status = 'Disponible'
+            if usrsAssigned > 1:
+                new_emp_status = 'Atendiendo'
+            
+            new_usr_status = 'Transferido'
+
+        new_oul = cur_oul
+        # Update Our Employee Status
+        updateItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('emp_users'), 'id', emp_id, 'status', new_emp_status, 'userInfo')
+        # Depending on the type of User, update it's status
+        if usr_type == 'anon':
+            updateItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('anon_users'), 'r_id', usr_id, 'status', new_usr_status, 'userInfo')
+            updateItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('anon_users'), 'r_id', usr_id, 'assignedTo', emp_id, 'userInfo')
+        elif usr_type == 'emp':
+            updateItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('emp_users'), 'r_id', usr_id, 'status', new_emp_status, 'userInfo')
+        elif usr_type == 'reg':
+            updateItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('reg_users'), 'r_id', usr_id, 'status', new_usr_status, 'userInfo')
+            updateItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('reg_users'), 'r_id', usr_id, 'assignedTo', emp_id, 'userInfo')
+        
+        new_userlist = new_oul.userlist
+
+        oper = CatalogOperations.query.filter_by(name_short='upd').first()
+        new_oul.userlist.get('rtc_online_users', {})['id'] = str(dt_now)
+        new_rtc_oul = RTCOnlineUsers()
+        new_rtc_oul.id = dt_now
+        new_rtc_oul.operation_id = oper.id
+        new_rtc_oul.userlist = new_userlist
+        db.session.add(new_rtc_oul)
+
+        cur_oul.enabled = False
+        db.session.add(cur_oul)
+
+        db.session.commit()
+
+        socketio.emit('RTCUserList', new_userlist, room='CON-EMPS')
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - SocketIO Update User Status Error: {}'.format(e))
+        return jsonify({ 'status': 'error' })
 
 
 @socketio.on_error()
 def error_handler(e):
     app.logger.error('** SWING_CMS ** - SocketIO Error: {}'.format(e))
+    db.session.rollback()
 

@@ -7,8 +7,7 @@
         <div class="container-avcalls--canvas">
             <div class="container-avcalls--callerid s-font-align-center">
                 <div class="container-avcalls--callerid-pic">
-                    <img id="callerid-pic" src="{{ url_for('static', filename='images/manifest/agent_f.svg') }}"
-                        alt="Avatar" />
+                    <img id="callerid-pic" src="{{ url_for('static', filename='images/manifest/agent_f.svg') }}" alt="Avatar" />
                 </div>
                 <div class="container-avcalls--callerid-data">
                     <span id="callerid-name" class="mdc-typography--headline2 s-font-color-on-secondary">- -</span>
@@ -82,10 +81,8 @@
                                         - -
                                     </span>
                                     <div class="container-chat--topbar-info-data-status">
-                                        <i
-                                            class="material-icons container-chat--topbar-info-data-status-icon s-font-color-secondary">stop_circle</i>
-                                        <span
-                                            class="container-chat--topbar-info-data-status-text mdc-typography--caption s-font-color-secondary">
+                                        <i class="material-icons container-chat--topbar-info-data-status-icon s-font-color-chat-offline">stop_circle</i>
+                                        <span class="container-chat--topbar-info-data-status-text mdc-typography--caption s-font-color-secondary">
                                             Offline
                                         </span>
                                     </div>
@@ -95,7 +92,7 @@
                     </div>
                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet
                                 mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle container-chat--body">
-                        <div class="container-chat--body-messages">
+                        <div class="container-chat--body-messages container-chat--body-messages-active">
                             <p class="container-chat--body-message-auto s-font-align-center">
                                 <span class="mdc-typography--caption s-font-color-secondary">
                                     ¡Hola! Gracias por comunicarte con CONECTA.
@@ -109,7 +106,7 @@
                                     Si tienes información que consideras puede ayudarnos a asistirte mejor, escribenos
                                     un mensaje.
                                 </span>
-                            <div id="s-loader-chat" class="s-loader">
+                            <div class="s-loader">
                                 <div class="s-loader-bounce1"></div>
                                 <div class="s-loader-bounce2"></div>
                                 <div class="s-loader-bounce3"></div>
@@ -149,7 +146,6 @@
 {% endblock %}
 {% block body_script_section %}
 <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
-<script src="{{ url_for('static', filename='js/rtc-signal.js') }}"></script>
 <script src="{{ url_for('static', filename='js/simplepeer.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/rtc-receiver.js') }}"></script>
 {% endblock %}

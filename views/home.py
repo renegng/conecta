@@ -1,11 +1,10 @@
 import datetime
 
-from . import auth, createCookieSession, createLoginSession, createJsonResponse, db
-from . import isFirebaseCookieSessionValid, verifyFirebaseCookieCreateSession
+from . import auth, createCookieSession, createLoginSession, createJsonResponse, db, getUserRedirectURL, isUserLoggedInRedirect
 from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
-from models.models import UserInfo, UserRole, UserXRole
+from models.models import User, CatalogUserRoles, UserXRole
 
 home = Blueprint('home', __name__, template_folder='templates', static_folder='static')
 
@@ -24,16 +23,26 @@ def _autocuidado():
 @home.route('/chat/')
 def _chat():
     app.logger.debug('** SWING_CMS ** - Try Chat')
-    return render_template('chat.html')
+    try:
+        # Validate if the user has a Valid Session and Redirects
+        response = isUserLoggedInRedirect('chat', 'redirect')
+        if response is not None: return response
+        
+        return render_template('chat.html')
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - Try Chat Error: {}'.format(e))
+        return jsonify({ 'status': 'error' })
 
 
 @home.route('/chat/admin/')
+@login_required
 def _chat_admin():
     app.logger.debug('** SWING_CMS ** - Chat Admin')
     return render_template('chat_admin.html')
 
 
 @home.route('/chat/home/')
+@login_required
 def _chat_home():
     app.logger.debug('** SWING_CMS ** - Chat Home')
     return render_template('chat_home.html')
@@ -58,6 +67,7 @@ def _dirservicios():
 
 
 @home.route('/home/')
+@login_required
 def _home():
     app.logger.debug('** SWING_CMS ** - Home')
     return render_template('acercade.html')
@@ -73,45 +83,41 @@ def _login():
 def _loginuser():
     app.logger.debug('** SWING_CMS ** - Login')
     try:
-        # Validate if the user has a Valid Session
-        if current_user.is_authenticated:
-            # If it has a valid Session, verifies the Firebase Cookie Session
-            if isFirebaseCookieSessionValid():
-                # Set URL depending on role
-                url = '/chat/admin/' if current_user.email == 'renegng@gmail.com' else '/chat/home/'
+        # Validate if the user has a Valid Session and Redirects
+        response = isUserLoggedInRedirect('loginuser', 'jsonResponse')
+        if response is not None: return response
 
-                return createJsonResponse('success', 'redirectURL', url)
-            else:
-                # If the Firebase Cookie Session is invalid, user is logged out and Login Process continues
-                logout_user()
-        else:
-            # If user doesnt have a Valid Session, validate if it has a Firebase Cookie Session
-            if verifyFirebaseCookieCreateSession():
-                # Set URL depending on role
-                url = '/chat/admin/' if current_user.email == 'renegng@gmail.com' else '/chat/home/'
-                return createJsonResponse('success', 'redirectURL', url)
-        
         # Login Process
         # Retrieve the uid from the JWT idToken
         idToken = request.json['idToken']
         decoded_token = auth.verify_id_token(idToken)
-        uid = decoded_token['uid']
+        usremail = decoded_token['email']
+        uid = decoded_token['uid'] if usremail != 'admusr@conecta.com' else 'CON-Administrator'
 
         # Search for the user in the DB.
-        user = UserInfo.query.filter_by(uid = uid).first()
+        user = User.query.filter_by(uid = uid).first()
         if user is None:
             # Retrieve Firebase's User info
             fbUser = auth.get_user(uid)
 
             # User is not registered on DB. Insert user in DB.
-            user = UserInfo()
+            user = User()
             user.uid = uid
             user.email = fbUser.email
             user.name = fbUser.display_name
+            user.phonenumber = fbUser.phone_number
             user.datecreated = datetime.datetime.utcnow()
-            user.cmuserid = 'CONE-' + user.name.strip().upper()[0:1] + user.datecreated.strftime('-%y%m%d-%H%M%S')
-            
+            user.cmuserid = 'CON-' + user.name.strip().upper()[0:1] + user.datecreated.strftime('-%y%m%d-%H%M%S')            
             db.session.add(user)
+            db.session.flush()
+
+            # Add User Role
+            user_role = CatalogUserRoles.query.filter_by(name_short='usr').first()
+            user_userxrole = UserXRole()
+            user_userxrole.user_id = user.id
+            user_userxrole.user_role_id = user_role.id
+            db.session.add(user_userxrole)
+
             db.session.commit()
             app.logger.info('** SWING_CMS ** - LoginUser added: {}'.format(user.id))
         
@@ -120,7 +126,7 @@ def _loginuser():
         
         # Return Session Cookie
         # Set URL depending on role
-        url = '/chat/admin/' if user.email == 'renegng@gmail.com' else '/chat/home/'
+        url = getUserRedirectURL(user, 'loginuser')
         
         response = createCookieSession(idToken, 'redirectURL', url)
         return response
@@ -131,7 +137,7 @@ def _loginuser():
 
 
 @home.route('/logoutuser/')
-# @login_required
+@login_required
 def _logoutuser():
     app.logger.debug('** SWING_CMS ** - Logout')
     try:

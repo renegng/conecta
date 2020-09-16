@@ -2,11 +2,10 @@ import datetime
 import firebase_admin
 
 from firebase_admin import auth, credentials
-from flask import flash, render_template, jsonify, request, redirect
+from flask import flash, render_template, jsonify, request, redirect, url_for
 from flask import current_app as app
 from flask_login import LoginManager, login_user, current_user, logout_user
-from models.models import db
-from models.models import UserInfo
+from models.models import db, User
 
 
 # Enable instance of SQLAlchemy
@@ -21,13 +20,13 @@ fba = firebase_admin.initialize_app(cred)
 # Enable Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'home_view._welcome'
+login_manager.login_view = 'home._welcome'
 login_manager.login_message = 'Debes Iniciar sesión o Registrarte para ingresar.'
 
 @login_manager.user_loader
 def load_user(uid):
     if uid:
-        return UserInfo.query.filter_by(uid = uid).first()
+        return User.query.filter_by(uid = uid).first()
     return None
 
 @login_manager.unauthorized_handler
@@ -39,7 +38,7 @@ def unauthorized():
             return redirect(request.url)
         else:
             flash('Debes Iniciar sesión o Registrarte para ingresar.', 'error')
-            return redirect(url_for('home_view._welcome'))
+            return redirect(url_for('home._welcome'))
     except Exception as e:
         app.logger.error('** SWING_CMS ** - UnauthorizedHandler Error: {}'.format(e))
         return jsonify({ 'status': 'error' })
@@ -58,8 +57,6 @@ def createJsonResponse(status = 'error', cmd = None, action = None):
 # Creates a Flask-Login Session instance
 def createLoginSession(user):
     try:
-        user.is_active = user.enabled
-        user.is_authenticated = True
         return login_user(user)
     except Exception as e:
         app.logger.error('** SWING_CMS ** - CreateLoginSession Error: {}'.format(e))
@@ -95,6 +92,40 @@ def createCookieSession(idToken, cmd = None, action = None):
         return jsonify({ 'status': 'error' })
 
 
+# Get User Redirect URL
+def getUserRedirectURL(user, origin):
+    try:
+        redirectURL = '/'
+
+        # Validate User Login Redirect URL
+        if origin == 'loginuser':
+            # Set URL for regular registered user
+            redirectURL = '/chat/home/'
+
+            # Iterate through the user's roles
+            for role in user.roles:
+                # Check if user has a different role than user
+                if role.user_role.name_short != 'usr':
+                    redirectURL = '/chat/admin/'
+        
+        # Validate Try Chat Redirect URL
+        elif origin == 'chat':
+            # Set URL for regular registered user
+            redirectURL = '/chat/home/'
+
+            # Iterate through the user's roles
+            for role in user.roles:
+                # Check if user has a different role than user
+                if role.user_role.name_short != 'usr':
+                    redirectURL = '/chat/admin/'
+
+        
+        return redirectURL
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - GetUserRedirectURL Error: {}'.format(e))
+        return jsonify({ 'status': 'error' })
+
+
 # Verifies Firebase's Cookies Sessions
 def isFirebaseCookieSessionValid():
     try:
@@ -114,6 +145,57 @@ def isFirebaseCookieSessionValid():
         return jsonify({ 'status': 'error' })
 
 
+# Verifies if User has any Session and Redirects
+def isUserLoggedInRedirect(origin, responseType):
+    try:
+        # Validate if the user has a Valid Session
+        if current_user.is_authenticated:
+            # If it has a valid Session, verifies the Firebase Cookie Session
+            if isFirebaseCookieSessionValid():
+                # Set URL depending on role
+                url = getUserRedirectURL(current_user, origin)
+
+                if responseType == 'redirect':
+                    return redirect(url)
+                elif responseType == 'jsonResponse':
+                    return createJsonResponse('success', 'redirectURL', url)
+            else:
+                # If the Firebase Cookie Session is invalid, user is logged out and Login Process continues
+                logout_user()
+        else:
+            # If user doesnt have a Valid Session, validate if it has a Firebase Cookie Session
+            if verifyFirebaseCookieCreateSession():
+                # Set URL depending on role
+                url = getUserRedirectURL(current_user, origin)
+
+                if responseType == 'redirect':
+                    return redirect(url)
+                elif responseType == 'jsonResponse':
+                    return createJsonResponse('success', 'redirectURL', url)
+        
+        return None
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - IsUserLoggedIn Error: {}'.format(e))
+        return jsonify({ 'status': 'error' })
+
+
+# Remove Item from List
+def removeItemFromList(lst, k, v):
+    for listItem in lst:
+        if listItem.get(k) == v:
+            lst.remove(listItem)
+
+
+# Update Item from List
+def updateItemFromList(lst, k, v, updK, updV, updObj = None):
+    for listItem in lst:
+        if listItem.get(k) == v:
+            if updObj is not None:
+                listItem.get(updObj, {})[updK] = updV
+            else:
+                listItem[updK] = updV
+
+
 # Verifies a Firebase Session Cookie and Creates a Flask Login Session
 def verifyFirebaseCookieCreateSession():
     try:
@@ -123,7 +205,7 @@ def verifyFirebaseCookieCreateSession():
         if decoded_claims:
             uid = decoded_claims['uid']
             # Search for the user in the DB.
-            user = UserInfo.query.filter_by(uid = uid).first()
+            user = User.query.filter_by(uid = uid).first()
             # Create User Session
             return createLoginSession(user)
         else:
@@ -131,3 +213,4 @@ def verifyFirebaseCookieCreateSession():
     except Exception as e:
         app.logger.error('** SWING_CMS ** - VerifyFirebaseCookieCreateSession Error: {}'.format(e))
         return jsonify({ 'status': 'error' })
+
