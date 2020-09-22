@@ -74,7 +74,7 @@
                                 Mensajes
                             </span>
                         </header>
-                        <div class="mdc-select container-chat--sidemenu-filters" role="filters">
+                        <div class="mdc-select container-chat--sidemenu-filters" role="filters" data-action-fn="filterRTCUserList">
                             <div class="mdc-select__anchor">
                                 <span class="mdc-select__ripple"></span>
                                 <input type="text" disabled readonly class="mdc-select__selected-text">
@@ -89,22 +89,22 @@
                                             Anonim@s
                                         </span>
                                     </li>
-                                    <li class="mdc-list-item mdc-list-item--selected" data-value="mine">
+                                    <li class="mdc-list-item" data-value="mine">
                                         <span class="mdc-list-item__text">
                                             Asignados a mí
                                         </span>
                                     </li>
-                                    <li class="mdc-list-item" data-value="agents">
+                                    <li class="mdc-list-item" data-value="emp">
                                         <span class="mdc-list-item__text">
                                             Funcionari@s
                                         </span>
                                     </li>
-                                    <li class="mdc-list-item" data-value="registered">
+                                    <li class="mdc-list-item" data-value="reg">
                                         <span class="mdc-list-item__text">
                                             Registrad@s
                                         </span>
                                     </li>
-                                    <li class="mdc-list-item" data-value="all">
+                                    <li class="mdc-list-item mdc-list-item--selected" data-value="all">
                                         <span class="mdc-list-item__text">
                                             Tod@s
                                         </span>
@@ -165,7 +165,7 @@
                                             stop_circle
                                         </i>
                                         <span class="container-chat--topbar-info-data-status-text mdc-typography--caption s-font-color-secondary">
-                                            Offline
+                                            - -
                                         </span>
                                     </div>
                                 </div>
@@ -240,6 +240,24 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="assigned-dialog" class="mdc-dialog">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="d-assigned-title" aria-describedby="d-assigned-content">
+                <h2 class="mdc-dialog__title" id="d-assigned-title">Usuari@ en sesión</h2>
+                <div class="mdc-dialog__content" id="d-assigned-content">
+                    <span id="d-assigned-usrname" class="s-font-color-primary"></span>, con estado <span id="d-assigned-status"></span>, 
+                    se encuentra asignad@ a <span id="d-assigned-empname" class="s-font-color-primary"></span>
+                </div>
+                <div class="mdc-dialog__actions">
+                    <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="accept" data-mdc-dialog-button-default>
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">OK</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
     </div>
 </main>
 {% endblock %}

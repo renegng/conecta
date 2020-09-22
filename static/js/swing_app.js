@@ -5,6 +5,7 @@ import anchorme from 'anchorme';
 import 'core-js';
 import 'regenerator-runtime/runtime';
 import { accountRedirect } from './swing_firebase';
+import { MDCDialog } from '@material/dialog';
 import { MDCDrawer } from "@material/drawer";
 import { MDCFloatingLabel } from '@material/floating-label';
 import { MDCIconButtonToggle } from '@material/icon-button';
@@ -21,7 +22,6 @@ import { MDCTextFieldHelperText } from '@material/textfield/helper-text';
 import { MDCTextFieldIcon } from '@material/textfield/icon';
 import { MDCTopAppBar } from '@material/top-app-bar';
 import { Workbox } from 'workbox-window/Workbox.mjs';
-import { isNull } from 'util';
 
 
 /************************** FUNCTIONS **************************/
@@ -179,7 +179,7 @@ export function createChatMessageContainer(txt, dateTime, user, userName = '') {
 }
 
 var lastMsgUser = '';
-export function appendChatMessage(txt, dateTime, user, userName = '', chatMsgElem = '') {
+export function appendChatMessage(txt, dateTime, user, userName = '', chatMsgElem = '', otherUserPhoto = '') {
     let chatContainer = document.querySelector('.container-chat--body-messages-active');
     if (chatMsgElem) {
         chatContainer = document.getElementById('m_' + chatMsgElem);
@@ -201,7 +201,7 @@ export function appendChatMessage(txt, dateTime, user, userName = '', chatMsgEle
                 break;
             case 'others':
                 msgContainerUserHeader.classList.add('container-chat--body-header-others');
-                msgContainerUserHeaderPic.src = advStreams.otherUserInfo.photoURL;
+                msgContainerUserHeaderPic.src = (otherUserPhoto)? otherUserPhoto : advStreams.otherUserInfo.photoURL;
                 msgContainerUserHeaderName.textContent = userName;
                 break;
         }
@@ -222,7 +222,7 @@ export function sendChatMessage() {
     let dateTime = Date.now();
     let textElement = document.getElementById('chat-textarea-input');
     let textMessage = textElement.value;
-    if (textMessage && textMessage.trim() != "") {
+    if (!textElement.disabled && textMessage && textMessage.trim() != "") {
         sendPeerChatMessage(
             'msg',
             textMessage,
@@ -237,7 +237,7 @@ export function sendChatMessage() {
 /* Allow 'window' context to reference the function */
 window.sendChatMessage = sendChatMessage;
 /* Enable the Enter Key for the Chat Text Area */
-if (!isNull(document.querySelector('#chat-textarea-input'))) {
+if (document.querySelector('#chat-textarea-input')) {
     document.querySelector('#chat-textarea-input').addEventListener('keyup', (evt) => {
         if (evt.keyCode === 13) {
             evt.preventDefault();
@@ -539,7 +539,7 @@ export function managePeerStream(action, stream = null) {
             case 'send':
                 /* Sends My Stream to Remote */
                 console.log('Sending My Stream');
-                if (!isNull(advStreams.myStream)) {
+                if (advStreams.myStream) {
                     peer.addStream(advStreams.myStream);
                     advStreams.myStreamSended = true;
                 } else {
@@ -628,6 +628,9 @@ export function initSnackbar(sb, initObject) {
             initObject.actionHandler();
         }
     });
+    if (sb.isOpen) {
+        sb.close('New snackbar initialization...');
+    }
 }
 
 
@@ -688,11 +691,18 @@ export function shareRedirect(e) {
 
 /************************** MATERIAL DESIGN COMPONENTS INIT **************************/
 
+// Material Dialog
+var assignedDialogEl = document.querySelector('#assigned-dialog');
+if (assignedDialogEl) {
+    mdcAssignedDialogEl = new MDCDialog(assignedDialogEl);
+}
+
+
 // Material Drawer & Top App Bar
 const drawerEl = document.querySelector('.mdc-drawer');
 const topAppBarEl = document.querySelector('.mdc-top-app-bar');
 const topAppBarNavEl = document.querySelector('.mdc-top-app-bar__navigation-icon');
-if (!isNull(drawerEl) && !isNull(topAppBarEl)) {
+if (drawerEl && topAppBarEl) {
     const mainContentEl = document.querySelector('.s-main-content');
     const drawerItemsEl = document.querySelector('.mdc-drawer__content .mdc-list');
 
@@ -750,86 +760,13 @@ if (!isNull(drawerEl) && !isNull(topAppBarEl)) {
             child.classList.add("mdc-list-item--activated");
         }
     });
-} else if (!isNull(topAppBarEl)) {
+} else if (topAppBarEl) {
     const topAppBar = MDCTopAppBar.attachTo(topAppBarEl);
     const mainContentEl = document.querySelector('.s-main-content');
 
     topAppBar.setScrollTarget(mainContentEl);
     topAppBarNavEl.classList.add("mdc-top-app-bar__navigation-icon--hidden");
 }
-
-
-// Material Menu
-var accountMenu = null;
-var accountMenuButton = null;
-if (!isNull(document.querySelector('#accountMenu'))) {
-    accountMenu = new MDCMenu(document.querySelector('#accountMenu'));
-    accountMenuButton = document.querySelector('#accountButton');
-}
-if (accountMenuButton != null) {
-    accountMenuButton.addEventListener('click', () => (accountMenu.open = !accountMenu.open));
-    accountMenu.setAnchorCorner(Corner.BOTTOM_START);
-    document.querySelector('#accountMenu').addEventListener('MDCMenu:selected', evt => accountRedirect(evt));
-}
-
-var aidMenu = null;
-var aidMenuButton = null;
-if (!isNull(document.querySelector('#aidMenu'))) {
-    aidMenu = new MDCMenu(document.querySelector('#aidMenu'));
-    aidMenuButton = document.querySelector('#aidMenuButton');
-}
-if (aidMenuButton != null) {
-    aidMenuButton.addEventListener('click', () => (aidMenu.open = !aidMenu.open));
-    aidMenu.setAnchorCorner(Corner.BOTTOM_START);
-    document.querySelector('#aidMenu').addEventListener('MDCMenu:selected', evt => accountRedirect(evt));
-}
-
-var moreOptionMenu = null;
-var moreOptionMenuButton = null;
-if (!isNull(document.querySelector('#moreOptionsMenu'))) {
-    moreOptionMenu = new MDCMenu(document.querySelector('#moreOptionsMenu'));
-    moreOptionMenuButton = document.querySelector('#moreOptionsButton');
-}
-if (moreOptionMenuButton != null) {
-    moreOptionMenuButton.addEventListener('click', () => (moreOptionMenu.open = !moreOptionMenu.open));
-    moreOptionMenu.setAnchorCorner(Corner.BOTTOM_START);
-    // document.querySelector('#moreOptionsMenu').addEventListener('MDCMenu:selected', evt => shareRedirect(evt));
-}
-
-var shareMenu = null;
-var shareMenuButton = null;
-if (!isNull(document.querySelector('#shareMenu'))) {
-    shareMenu = new MDCMenu(document.querySelector('#shareMenu'));
-    shareMenuButton = document.querySelector('#shareButton');
-}
-if (shareMenuButton != null) {
-    shareMenuButton.addEventListener('click', () => (shareMenu.open = !shareMenu.open));
-    shareMenu.setAnchorCorner(Corner.BOTTOM_START);
-    document.querySelector('#shareMenu').addEventListener('MDCMenu:selected', evt => shareRedirect(evt));
-}
-
-
-// Material Ripple
-let mdcButtonRipples = [].map.call(document.querySelectorAll('.mdc-icon-button'), function (el) {
-    return new MDCRipple(el);
-});
-mdcButtonRipples.forEach((elem) => {
-    elem.unbounded = true;
-});
-mdcButtonRipples = mdcButtonRipples.concat([].map.call(document.querySelectorAll('.mdc-button, .mdc-fab'), function (el) {
-    return new MDCRipple(el);
-}));
-
-
-// Material Snackbar
-const snackbar = new MDCSnackbar(document.querySelector('.mdc-snackbar'));
-
-
-// Material Tab
-var mdcTabBars = [].map.call(document.querySelectorAll('.mdc-tab-bar'), function (el) {
-    return new MDCTabBar(el);
-});
-// document.querySelector('#mdc-tab-bar__id-noticias').addEventListener('MDCTabBar:activated', evt => showTabContent(evt));
 
 
 // Material Floating Labels
@@ -839,7 +776,7 @@ var mdcFloatingLabels = [].map.call(document.querySelectorAll('.mdc-floating-lab
 
 
 // Material Image List Open Image
-if (!isNull(document.querySelector('.mdc-image-list__image'))) {
+if (document.querySelector('.mdc-image-list__image')) {
     Array.from(document.getElementsByClassName('mdc-image-list__image')).forEach((elem) => {
         elem.addEventListener('click', () => (window.open(elem.getAttribute('src'))));
     });
@@ -859,15 +796,95 @@ var mdcLists = [].map.call(document.querySelectorAll('.mdc-list:not(.mdc-menu__i
 });
 
 
+// Material Menu
+var accountMenu = null;
+var accountMenuButton = null;
+if (document.querySelector('#accountMenu')) {
+    accountMenu = new MDCMenu(document.querySelector('#accountMenu'));
+    accountMenuButton = document.querySelector('#accountButton');
+}
+if (accountMenuButton != null) {
+    accountMenuButton.addEventListener('click', () => (accountMenu.open = !accountMenu.open));
+    accountMenu.setAnchorCorner(Corner.BOTTOM_START);
+    document.querySelector('#accountMenu').addEventListener('MDCMenu:selected', evt => accountRedirect(evt));
+}
+
+var aidMenu = null;
+var aidMenuButton = null;
+if (document.querySelector('#aidMenu')) {
+    aidMenu = new MDCMenu(document.querySelector('#aidMenu'));
+    aidMenuButton = document.querySelector('#aidMenuButton');
+}
+if (aidMenuButton != null) {
+    aidMenuButton.addEventListener('click', () => (aidMenu.open = !aidMenu.open));
+    aidMenu.setAnchorCorner(Corner.BOTTOM_START);
+    document.querySelector('#aidMenu').addEventListener('MDCMenu:selected', evt => accountRedirect(evt));
+}
+
+var moreOptionMenu = null;
+var moreOptionMenuButton = null;
+if (document.querySelector('#moreOptionsMenu')) {
+    moreOptionMenu = new MDCMenu(document.querySelector('#moreOptionsMenu'));
+    moreOptionMenuButton = document.querySelector('#moreOptionsButton');
+}
+if (moreOptionMenuButton != null) {
+    moreOptionMenuButton.addEventListener('click', () => (moreOptionMenu.open = !moreOptionMenu.open));
+    moreOptionMenu.setAnchorCorner(Corner.BOTTOM_START);
+    // document.querySelector('#moreOptionsMenu').addEventListener('MDCMenu:selected', evt => shareRedirect(evt));
+}
+
+var shareMenu = null;
+var shareMenuButton = null;
+if (document.querySelector('#shareMenu')) {
+    shareMenu = new MDCMenu(document.querySelector('#shareMenu'));
+    shareMenuButton = document.querySelector('#shareButton');
+}
+if (shareMenuButton != null) {
+    shareMenuButton.addEventListener('click', () => (shareMenu.open = !shareMenu.open));
+    shareMenu.setAnchorCorner(Corner.BOTTOM_START);
+    document.querySelector('#shareMenu').addEventListener('MDCMenu:selected', evt => shareRedirect(evt));
+}
+
+
 // Material Notched Ouline
 var mdcNotchedOutlines = [].map.call(document.querySelectorAll('.mdc-notched-outline'), function (el) {
     return new MDCNotchedOutline(el);
 });
 
+
+// Material Ripple
+let mdcButtonRipples = [].map.call(document.querySelectorAll('.mdc-icon-button'), function (el) {
+    return new MDCRipple(el);
+});
+mdcButtonRipples.forEach((elem) => {
+    elem.unbounded = true;
+});
+mdcButtonRipples = mdcButtonRipples.concat([].map.call(document.querySelectorAll('.mdc-button, .mdc-fab'), function (el) {
+    return new MDCRipple(el);
+}));
+
+
+// Material Snackbar
+const snackbar = new MDCSnackbar(document.querySelector('.mdc-snackbar'));
+
+
 // Material Selects
 var mdcSelects = [].map.call(document.querySelectorAll('.mdc-select'), function (el) {
-    return new MDCSelect(el);
+    let mdcSel = new MDCSelect(el);
+    let actionFn = el.getAttribute('data-action-fn');
+    if (actionFn) {
+        let fn = (typeof actionFn == "string") ? window[actionFn] : actionFn;
+        mdcSel.listen('MDCSelect:change', () => fn(mdcSel.value));
+    }
+    return mdcSel;
 });
+
+
+// Material Tab
+var mdcTabBars = [].map.call(document.querySelectorAll('.mdc-tab-bar'), function (el) {
+    return new MDCTabBar(el);
+});
+// document.querySelector('#mdc-tab-bar__id-noticias').addEventListener('MDCTabBar:activated', evt => showTabContent(evt));
 
 
 // Material Textfields
@@ -903,7 +920,7 @@ document.querySelectorAll('.mdc-button[data-action-type], .mdc-icon-button[data-
 
 
 // Google Maps component
-if (!isNull(document.querySelector('.s-googlemaps'))) {
+if (document.querySelector('.s-googlemaps')) {
     var gmComp = document.querySelector('.s-googlemaps');
     var gmURLL = 'https://www.google.com/maps?output=embed&daddr=ciudad+mujer&saddr=';
     var gmIfrS = "<iframe src='";

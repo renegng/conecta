@@ -1,4 +1,3 @@
-import { isNull } from 'util';
 import { advStreams, postFetch } from './swing_app';
 
 // FirebaseUI config.
@@ -45,7 +44,7 @@ var firebaseUIConfig = {
 var firebaseUI = new firebaseui.auth.AuthUI(firebase.auth());
 
 // The start method will wait until the DOM is loaded.
-if (!isNull(document.querySelector('#firebaseui-auth-container'))) {
+if (document.querySelector('#firebaseui-auth-container')) {
     firebaseUI.start('#firebaseui-auth-container', firebaseUIConfig);
 }
 
@@ -133,7 +132,7 @@ export function accountRedirect(e) {
 //     });
 // };
 
-// if (!isNull(document.querySelector('.s-user-info'))) {
+// if (document.querySelector('.s-user-info')) {
 //     window.addEventListener('load', function () {
 //         fbInitApp()
 //     });
