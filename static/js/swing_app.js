@@ -697,6 +697,11 @@ if (assignedDialogEl) {
     mdcAssignedDialogEl = new MDCDialog(assignedDialogEl);
 }
 
+var endRTCDialogEl = document.querySelector('#endrtc-dialog');
+if (endRTCDialogEl) {
+    mdcEndRTCDialogEl = new MDCDialog(endRTCDialogEl);
+}
+
 
 // Material Drawer & Top App Bar
 const drawerEl = document.querySelector('.mdc-drawer');
