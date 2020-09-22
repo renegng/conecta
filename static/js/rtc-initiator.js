@@ -452,6 +452,14 @@ function createRTCMessagesUserContainer(room_id, user, uType) {
     return userContainer;
 }
 
+// End RTC User Session
+function endRTCSession() {
+    peer.send(JSON.stringify({
+        msgType: 'endRTC'
+    }));
+    peer.destroy();
+}
+
 // Filter RTC User List
 var lastRTCFilterVal;
 function filterRTCUserList(value) {

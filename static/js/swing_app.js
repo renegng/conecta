@@ -830,7 +830,7 @@ if (document.querySelector('#moreOptionsMenu')) {
 if (moreOptionMenuButton != null) {
     moreOptionMenuButton.addEventListener('click', () => (moreOptionMenu.open = !moreOptionMenu.open));
     moreOptionMenu.setAnchorCorner(Corner.BOTTOM_START);
-    // document.querySelector('#moreOptionsMenu').addEventListener('MDCMenu:selected', evt => shareRedirect(evt));
+    document.querySelector('#moreOptionsMenu').addEventListener('MDCMenu:selected', evt => endRTCSession());
 }
 
 var shareMenu = null;

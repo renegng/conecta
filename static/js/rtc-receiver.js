@@ -6,6 +6,9 @@ window.peer = peer;
 // Initiator Room ID
 const iRID = { 'id' : '' };
 
+// MDC Dialog - End RTC
+var mdcEndRTCDialogEl = null;
+
 function initializeRTC() {
     console.log('Initializing SocketIO/SimplePeer');
 
@@ -116,6 +119,13 @@ function establishRTC() {
                 swcms.displayCallUI(jMsg.msg, jMsg.msgType);
                 break;
     
+            case 'endRTC':
+                document.querySelector('.container-chat--body-messages').textContent = '';
+                mdcEndRTCDialogEl.open();
+                peer.destroy();
+                socket.close();
+                break;
+            
             case 'msg':
                 swcms.appendChatMessage(jMsg.msg, jMsg.msgDateTime, 'others', jMsg.msgUserName);
                 break;
