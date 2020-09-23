@@ -3,6 +3,10 @@ var peer;
 /* Allow 'window' context to reference the function */
 window.peer = peer;
 
+var enableOfflineMsgs = false;
+/* Allow 'window' context to reference the function */
+window.enableOfflineMsgs = enableOfflineMsgs;
+
 // RTC Connections
 var rtcConnections = [];
 
@@ -59,6 +63,7 @@ function initializeRTC () {
 
 // SimplePeer User Connection Class
 class rtcPeerConnection {
+    #isInitialSignal;
     #isInitiator;
     #rtcSimplePeer;
     #uListElem;
@@ -66,6 +71,7 @@ class rtcPeerConnection {
     constructor(init, uListElem) {
         this.#isInitiator = init;
         this.#uListElem = uListElem;
+        this.#isInitialSignal = true;
 
         this.#rtcSimplePeer = new SimplePeer({
             config: {
@@ -98,6 +104,11 @@ class rtcPeerConnection {
                 console.log('Receiver Signaling Started');
                 socket.emit('sendAnswerToUser', JSON.stringify({ 'r_id' : iRID.id, 'data' : data}));
             }
+
+            if (this.#isInitialSignal) {
+                this.#isInitialSignal = false;
+                swcms.showUserRTCConSnackbar('con');
+            }
         });
     
         this.#rtcSimplePeer.on('error', (err) => {
@@ -127,6 +138,8 @@ class rtcPeerConnection {
                 msgType: 'welcome',
                 msgUserInfo: userData
             }));
+
+            enableRTCUserList();
         });
         
         this.#rtcSimplePeer.on('close', () => {
@@ -141,6 +154,8 @@ class rtcPeerConnection {
             });
     
             rtcConnections = newRTCConnections;
+            swcms.showUserRTCConSnackbar('dcon');
+            enableRTCUserList();
         });
         
         this.#rtcSimplePeer.on('data', (data) => {
@@ -161,6 +176,10 @@ class rtcPeerConnection {
                         swcms.endAVCall(false);
                     }
                     swcms.displayCallUI(jMsg.msg, jMsg.msgType);
+                    break;
+                
+                case 'endRTC':
+                    this.#rtcSimplePeer.destroy();
                     break;
         
                 case 'msg':
@@ -239,7 +258,9 @@ function establishRTC(init = true, receiverData = null) {
     }
 
     // Create new RTC Simple Peer Connection
+    // Disable RTC User List until Connection to prevent parallel offers/answers
     let newPeer = new rtcPeerConnection(init, uListElem);
+    enableRTCUserList(false);
     
     // If Peer was started as Receiver we send a signal
     if (receiverData) {
@@ -452,22 +473,38 @@ function createRTCMessagesUserContainer(room_id, user, uType) {
     return userContainer;
 }
 
+// Enable or Disable RTC User List to prevent connection issues
+function enableRTCUserList(enable = true){
+    document.querySelectorAll('#active-rooms > li').forEach((elm) => {
+        if (enable) {
+            elm.classList.remove('container--disable-click');
+        } else {
+            elm.classList.add('container--disable-click');
+        }
+    });
+}
+
 // End RTC User Session
-function endRTCSession() {
-    peer.send(JSON.stringify({
-        msgType: 'endRTC'
-    }));
-    peer.destroy();
+function endRTCSession(showUsrSatSurv = false) {
+    let usrElem = document.getElementById('active-rooms').querySelector('.mdc-list-item--selected');
+    let u_id = usrElem.getAttribute('data-meta-rid');
+    let u_type = usrElem.getAttribute('data-meta-utype');
+
+    if (!peer.destroyed && peer.connected) {
+        peer.send(JSON.stringify({
+            msgType: 'endRTC',
+            showUSS: showUsrSatSurv
+        }));
+        peer.destroy();
+    }
+
+    socket.emit('endRTC', JSON.stringify({ 'u_id' : u_id, 'u_type' : u_type }));
+    showConversationUI(false, usrElem);
 }
 
 // Filter RTC User List
-var lastRTCFilterVal;
+var lastRTCFilterVal = 'all';
 function filterRTCUserList(value) {
-    console.log('Filtering...');
-    // if (lastRTCFilterVal == value) {
-    //     return;
-    // }
-
     switch (value) {
         case 'all':
             document.querySelectorAll('#active-rooms > li').forEach((elm) => {
@@ -495,7 +532,6 @@ function filterRTCUserList(value) {
             });
             break;
     }
-
     lastRTCFilterVal = value;
 }
 
@@ -505,6 +541,23 @@ function hideRTCMessagesLoader(uid) {
     let loaderElem = msgContainer.querySelector('.s-loader');
     
     loaderElem.classList.add('container--hidden');
+}
+
+// More Options Menu Selected Option
+function moreOptionsSelection(index) {
+    switch (index) {
+        // Transfer
+        case 0:
+            break;
+        // End Chat with User Satisfaction Survey
+        case 1:
+            endRTCSession(true);
+            break;
+        // End Chat without Survey
+        case 2:
+            endRTCSession();
+            break;
+    }
 }
 
 // Set RTC User List Container Data
@@ -632,6 +685,10 @@ function showConversationUI(showOrHide, usrElem) {
         } else {
             chatNoConver.classList.remove('container--hidden');
             sideMenuEl.classList.remove('container--hidden');
+        }
+
+        if (elemFocus) {
+            usrElem.remove();
         }
     }
 }

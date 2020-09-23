@@ -42,7 +42,7 @@ def _connect():
         # Retrieve the user list depending on the user's role and Append User into the list
         new_oul = cur_oul
         if current_user.is_authenticated:
-            if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc']):
+            if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc', 'coo']):
                 new_oul.userlist.get('rtc_online_users', {}).get('emp_users').append(rtc_user)
             else:
                 new_oul.userlist.get('rtc_online_users', {}).get('reg_users').append(rtc_user)
@@ -76,7 +76,7 @@ def _connect():
 
         # Add Employee to Room and Send User List
         if current_user.is_authenticated:
-            if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc']):
+            if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc', 'coo']):
                 join_room('CON-EMPS')
         
         socketio.emit('userIsConnected', { 'status' : 'success', 'id' : user.id, 'roles' : user.get_user_roles() }, room=request.sid)
@@ -103,8 +103,20 @@ def _disconnect():
         # Retrieve the user list depending on the user's role and Remove User from List
         new_oul = cur_oul
         if current_user.is_authenticated:
-            if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc']):
+            if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc', 'coo']):
                 removeItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('emp_users'), 'id', user.id)
+                
+                # Update all users assigned status back to default
+                new_usr_status = 'Disponible'
+
+                # Depending on the type of User, update it's status
+                ulist = new_oul.userlist.get('rtc_online_users', {}).get('anon_users')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'status', new_usr_status, 'userInfo')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'assignedTo', None, 'userInfo')
+                
+                ulist = new_oul.userlist.get('rtc_online_users', {}).get('reg_users')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'status', new_usr_status, 'userInfo')
+                updateItemFromList(ulist, 'assignedTo', current_user.id, 'userInfo', 'assignedTo', None, 'userInfo')
             else:
                 removeItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('reg_users'), 'id', user.id)
         else:
@@ -112,7 +124,7 @@ def _disconnect():
         
         new_userlist = new_oul.userlist
 
-        oper = CatalogOperations.query.filter_by(name_short='del').first()
+        oper = CatalogOperations.query.filter_by(name_short='dcon').first()
         new_oul.userlist.get('rtc_online_users', {})['id'] = str(dt_now)
         new_rtc_oul = RTCOnlineUsers()
         new_rtc_oul.id = dt_now
@@ -137,12 +149,54 @@ def _disconnect():
 
         # Remove Employee to Room
         if current_user.is_authenticated:
-            if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc']):
+            if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc', 'coo']):
                 leave_room('CON-EMPS')
         
         socketio.emit('RTCUserList', new_userlist, room='CON-EMPS')
     except Exception as e:
         app.logger.error('** SWING_CMS ** - SocketIO User Disconnected Error: {}'.format(e))
+        return jsonify({ 'status': 'error' })
+
+
+@socketio.on('endRTC')
+def _endrtc(js):
+    app.logger.debug('** SWING_CMS ** - SocketIO EndRTC')
+    try:
+        j = json.loads(js)
+        usr_id = j['u_id']
+        usr_type = j['u_type']
+
+        # Remove User to RTC Online Users List
+        cur_oul = RTCOnlineUsers.query.with_for_update().order_by(RTCOnlineUsers.id.desc()).first()
+        dt_now = datetime.datetime.utcnow()
+        
+        # Depending on the type of User, remove the user
+        new_oul = cur_oul
+        if usr_type == 'anon':
+            ulist = new_oul.userlist.get('rtc_online_users', {}).get('anon_users')
+            removeItemFromList(ulist, 'r_id', usr_id)
+        elif usr_type == 'reg':
+            ulist = new_oul.userlist.get('rtc_online_users', {}).get('reg_users')
+            removeItemFromList(ulist, 'r_id', usr_id)
+        
+        new_userlist = new_oul.userlist
+
+        oper = CatalogOperations.query.filter_by(name_short='del').first()
+        new_oul.userlist.get('rtc_online_users', {})['id'] = str(dt_now)
+        new_rtc_oul = RTCOnlineUsers()
+        new_rtc_oul.id = dt_now
+        new_rtc_oul.operation_id = oper.id
+        new_rtc_oul.userlist = new_userlist
+        db.session.add(new_rtc_oul)
+
+        cur_oul.enabled = False
+        db.session.add(cur_oul)
+
+        db.session.commit()
+
+        socketio.emit('RTCUserList', new_userlist, room='CTOS-EMPS')
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - SocketIO EndRTC Error: {}'.format(e))
         return jsonify({ 'status': 'error' })
 
 
@@ -216,16 +270,19 @@ def _updateUsersStatus(js):
 
         new_oul = cur_oul
         # Update Our Employee Status
-        updateItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('emp_users'), 'id', emp_id, 'status', new_emp_status, 'userInfo')
+        ulist = new_oul.userlist.get('rtc_online_users', {}).get('emp_users')
+        updateItemFromList(ulist, 'id', emp_id, None, 'status', new_emp_status, 'userInfo')
         # Depending on the type of User, update it's status
         if usr_type == 'anon':
-            updateItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('anon_users'), 'r_id', usr_id, 'status', new_usr_status, 'userInfo')
-            updateItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('anon_users'), 'r_id', usr_id, 'assignedTo', emp_id, 'userInfo')
+            ulist = new_oul.userlist.get('rtc_online_users', {}).get('anon_users')
+            updateItemFromList(ulist, 'r_id', usr_id, None, 'status', new_usr_status, 'userInfo')
+            updateItemFromList(ulist, 'r_id', usr_id, None, 'assignedTo', emp_id, 'userInfo')
         elif usr_type == 'emp':
-            updateItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('emp_users'), 'r_id', usr_id, 'status', new_emp_status, 'userInfo')
+            updateItemFromList(ulist, 'r_id', usr_id, None, 'status', new_emp_status, 'userInfo')
         elif usr_type == 'reg':
-            updateItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('reg_users'), 'r_id', usr_id, 'status', new_usr_status, 'userInfo')
-            updateItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('reg_users'), 'r_id', usr_id, 'assignedTo', emp_id, 'userInfo')
+            ulist = new_oul.userlist.get('rtc_online_users', {}).get('reg_users')
+            updateItemFromList(ulist, 'r_id', usr_id, None, 'status', new_usr_status, 'userInfo')
+            updateItemFromList(ulist, 'r_id', usr_id, None, 'assignedTo', emp_id, 'userInfo')
         
         new_userlist = new_oul.userlist
 

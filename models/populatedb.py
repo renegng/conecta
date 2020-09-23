@@ -156,6 +156,9 @@ def populateCatalogUserRoles():
         social_role = CatalogUserRoles(name='Trabajadora Social', name_short='soc')
         db.session.add(social_role)
 
+        coordinator_role = CatalogUserRoles(name='Coordinadora', name_short='coo')
+        db.session.add(coordinator_role)
+
         db.session.commit()
 
         return jsonify({ 'status': 'success' })
