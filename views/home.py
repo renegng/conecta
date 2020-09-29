@@ -92,7 +92,7 @@ def _loginuser():
         idToken = request.json['idToken']
         decoded_token = auth.verify_id_token(idToken)
         usremail = decoded_token['email']
-        uid = decoded_token['uid'] if usremail != 'admusr@conecta.com' else 'CON-Administrator'
+        uid = decoded_token['uid'] if usremail != 'admusr@conecta.gob.hn' else 'CON-Administrator'
 
         # Search for the user in the DB.
         user = User.query.filter_by(uid = uid).first()
