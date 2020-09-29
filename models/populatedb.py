@@ -63,7 +63,7 @@ def populateDefaultUsers():
         # Add Admin User
         admin_user = User()
         admin_user.uid = 'CON-Administrator'
-        admin_user.email = 'admusr@conecta.com'
+        admin_user.email = 'admusr@conecta.gob.hn'
         admin_user.name = 'Administrador CONECTA'
         admin_user.cmuserid = 'CON-ADM-200000-0001'
         db.session.add(admin_user)
@@ -80,7 +80,7 @@ def populateDefaultUsers():
         # Add Anon User
         anon_user = User()
         anon_user.uid = 'CON-Anonim@'
-        anon_user.email = 'anon@conecta.com'
+        anon_user.email = 'anon@conecta.gob.hn'
         anon_user.name = 'Anonim@'
         anon_user.cmuserid = 'CON-ANN-200000-0001'
         db.session.add(anon_user)
@@ -91,6 +91,91 @@ def populateDefaultUsers():
         anon_userxrole.user_id = anon_user.id
         anon_userxrole.user_role_id = user_role.id
         db.session.add(anon_userxrole)
+
+        db.session.commit()
+
+        # Add Advisor User
+        advisor_user = User()
+        advisor_user.uid = 'CON-Orientadora'
+        advisor_user.email = 'orientadora@conecta.gob.hn'
+        advisor_user.name = 'Orientadora CONECTA'
+        advisor_user.cmuserid = 'CON-ORI-200000-0001'
+        db.session.add(advisor_user)
+        db.session.flush()
+        # Add Advisor Role
+        advisor_role = CatalogUserRoles.query.filter_by(name_short='ori').first()
+        advisor_userxrole = UserXRole()
+        advisor_userxrole.user_id = advisor_user.id
+        advisor_userxrole.user_role_id = advisor_role.id
+        db.session.add(advisor_userxrole)
+
+        db.session.commit()
+
+        # Add Lawyer User
+        lawyer_user = User()
+        lawyer_user.uid = 'CON-Abogada'
+        lawyer_user.email = 'abogada@conecta.gob.hn'
+        lawyer_user.name = 'Abogada CONECTA'
+        lawyer_user.cmuserid = 'CON-ABO-200000-0001'
+        db.session.add(lawyer_user)
+        db.session.flush()
+        # Add Lawyer Role
+        lawyer_role = CatalogUserRoles.query.filter_by(name_short='abo').first()
+        lawyer_userxrole = UserXRole()
+        lawyer_userxrole.user_id = lawyer_user.id
+        lawyer_userxrole.user_role_id = lawyer_role.id
+        db.session.add(lawyer_userxrole)
+
+        db.session.commit()
+
+        # Add Psychologist User
+        psy_user = User()
+        psy_user.uid = 'CON-Psychologist'
+        psy_user.email = 'psicologa@conecta.gob.hn'
+        psy_user.name = 'Psicologa CONECTA'
+        psy_user.cmuserid = 'CON-PSY-200000-0001'
+        db.session.add(psy_user)
+        db.session.flush()
+        # Add Psychologist Role
+        psy_role = CatalogUserRoles.query.filter_by(name_short='psi').first()
+        psy_userxrole = UserXRole()
+        psy_userxrole.user_id = psy_user.id
+        psy_userxrole.user_role_id = psy_role.id
+        db.session.add(psy_userxrole)
+
+        db.session.commit()
+
+        # Add Social Worker User
+        social_user = User()
+        social_user.uid = 'CON-TrabajadoraSocial'
+        social_user.email = 'social@conecta.gob.hn'
+        social_user.name = 'Trabajadora Social CONECTA'
+        social_user.cmuserid = 'CON-SOC-200000-0001'
+        db.session.add(social_user)
+        db.session.flush()
+        # Add Social Worker Role
+        social_role = CatalogUserRoles.query.filter_by(name_short='soc').first()
+        social_userxrole = UserXRole()
+        social_userxrole.user_id = social_user.id
+        social_userxrole.user_role_id = social_role.id
+        db.session.add(social_userxrole)
+
+        db.session.commit()
+
+        # Add Coordinator User
+        coor_user = User()
+        coor_user.uid = 'CON-Coordinadora'
+        coor_user.email = 'coordinadora@conecta.gob.hn'
+        coor_user.name = 'Coordinadora CONECTA'
+        coor_user.cmuserid = 'CON-COO-200000-0001'
+        db.session.add(coor_user)
+        db.session.flush()
+        # Add Coordinator Role
+        coor_role = CatalogUserRoles.query.filter_by(name_short='coo').first()
+        coor_userxrole = UserXRole()
+        coor_userxrole.user_id = coor_user.id
+        coor_userxrole.user_role_id = coor_role.id
+        db.session.add(coor_userxrole)
 
         db.session.commit()
 

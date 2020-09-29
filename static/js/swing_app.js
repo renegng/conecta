@@ -13,6 +13,7 @@ import { MDCLineRipple } from '@material/line-ripple';
 import { MDCList } from "@material/list";
 import { MDCMenu, Corner } from '@material/menu';
 import { MDCNotchedOutline } from '@material/notched-outline';
+import { MDCRadio } from '@material/radio';
 import { MDCRipple } from '@material/ripple';
 import { MDCSelect } from '@material/select';
 import { MDCSnackbar } from '@material/snackbar';
@@ -238,8 +239,8 @@ export function sendChatMessage() {
 window.sendChatMessage = sendChatMessage;
 /* Enable the Enter Key for the Chat Text Area */
 if (document.querySelector('#chat-textarea-input')) {
-    document.querySelector('#chat-textarea-input').addEventListener('keyup', (evt) => {
-        if (evt.keyCode === 13) {
+    document.querySelector('#chat-textarea-input').addEventListener('keydown', (evt) => {
+        if (evt.key === 'Enter') {
             evt.preventDefault();
             document.querySelector('#chat-textarea-button').click();
         }
@@ -255,8 +256,7 @@ export function sendPeerChatMessage(type, text, dateTime, userName) {
             msgDateTime: dateTime,
             msgUserName: userName
         }));
-    }
-    if (enableOfflineMsgs) {
+    } else if (enableOfflineMsgs) {
         offlineMsgs.push(JSON.stringify({
             msgType: type,
             msg: text,
@@ -391,6 +391,16 @@ const disconPeerSBDataObj = {
     timeout: 5000,
     actionHandler: () => {
         console.log('User disconnected.');
+    }
+};
+
+// Snackbar Data for Transfering Peers
+const transferPeerSBDataObj = {
+    message: 'Transfiriendo usuario...',
+    actionText: 'OK',
+    timeout: 5000,
+    actionHandler: () => {
+        console.log('Transfering user...');
     }
 };
 
@@ -676,13 +686,21 @@ window.initSnackbar = initSnackbar;
 
 
 // Show Snackbars of User Connection and Disconnection
-export function showUserRTCConSnackbar(state) {
+export function showUserRTCConSnackbar(state, error = '') {
     switch (state) {
         case 'con':
             initSnackbar(snackbar, conPeerSBDataObj);
             break;
         case 'dcon':
             initSnackbar(snackbar, disconPeerSBDataObj);
+            break;
+        case 'err':
+            let errSB = failedGetUserMediaSBDataObj;
+            errSB.message = error;
+            initSnackbar(snackbar, errSB);
+            break;
+        case 'trn':
+            initSnackbar(snackbar, transferPeerSBDataObj);
             break;
     }
 }
@@ -756,6 +774,11 @@ if (assignedDialogEl) {
 var endRTCDialogEl = document.querySelector('#endrtc-dialog');
 if (endRTCDialogEl) {
     mdcEndRTCDialogEl = new MDCDialog(endRTCDialogEl);
+}
+
+var transferDialogEl = document.querySelector('#transfer-dialog');
+if (transferDialogEl) {
+    mdcTransferDialogEl = new MDCDialog(transferDialogEl);
 }
 
 
@@ -916,6 +939,12 @@ if (shareMenuButton != null) {
 // Material Notched Ouline
 var mdcNotchedOutlines = [].map.call(document.querySelectorAll('.mdc-notched-outline'), function (el) {
     return new MDCNotchedOutline(el);
+});
+
+
+// Material Radio Buttons
+var mdcRadioButtons = [].map.call(document.querySelectorAll('.mdc-radio'), function (el) {
+    return new MDCRadio(el);
 });
 
 

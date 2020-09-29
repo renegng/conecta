@@ -73,17 +73,19 @@ function establishRTC() {
         trickle: false
     });
 
-    if (isInitialSignal) {
-        swcms.showUserRTCConSnackbar('con');
-        isInitialSignal = false;
-    }
-
-    peer.on('error', err => console.log('error', err));
+    peer.on('error', err => {
+        console.log('error', err);
+        swcms.showUserRTCConSnackbar('err', err);
+    });
     
     peer.on('signal', (data) => {
         console.log('Receiver Signaling Started');
         console.log(data);
         socket.emit('sendAnswerToUser', JSON.stringify({ 'r_id' : iRID.id, 'data' : data}));
+        if (isInitialSignal) {
+            swcms.showUserRTCConSnackbar('con');
+            isInitialSignal = false;
+        }
     });
     
     peer.on('connect', () => {
@@ -128,7 +130,7 @@ function establishRTC() {
                 }
                 swcms.displayCallUI(jMsg.msg, jMsg.msgType);
                 break;
-    
+
             case 'endRTC':
                 peer.destroy();
                 if (jMsg.showUSS) {
@@ -136,7 +138,7 @@ function establishRTC() {
                 }
                 document.querySelector('.container-chat--body-messages').textContent = '';
                 break;
-            
+
             case 'msg':
                 swcms.appendChatMessage(jMsg.msg, jMsg.msgDateTime, 'others', jMsg.msgUserName);
                 break;
