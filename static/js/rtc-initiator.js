@@ -129,7 +129,7 @@ class rtcPeerConnection {
         
         this.rtcSimplePeer.on('connect', () => {
             console.log('Initiator Connected');
-            let userData = swcms.advStreams.myUserInfo;
+            let userData = Object.assign({}, swcms.advStreams.myUserInfo);
 
             if (this.uListElem.getAttribute('data-meta-uid') == 2) {
                 userData.name = 'Agente CONECTA';
@@ -548,7 +548,7 @@ function endRTCSession(showUsrSatSurv = false) {
         peer.destroy();
     }
 
-    socket.emit('endRTC', JSON.stringify({ 'u_id' : r_id, 'u_type' : u_type }));
+    socket.emit('endRTC', JSON.stringify({ 'e_id' : advStreams.myUserInfo.id, 'u_id' : r_id, 'u_type' : u_type }));
     showConversationUI(false, usrElem);
     // If the user is not an Employee, remove the user from the list
     if (u_type == 'anon' || u_type == 'reg'){
@@ -828,6 +828,17 @@ function showRTCUserList(userlist) {
             appendRTCTransferList(user);
             rtcULID.push('l_' + user.id);
             rtcUTID.push('tl_' + user.id);
+        } else {
+            // Update User Account Info
+            let accImgEl = document.querySelector('#header-accountImage');
+            let accNameEl = document.querySelector('.container-chat--sidemenu-header-info-data-name');
+            let accStatEl = document.querySelector('.container-chat--sidemenu-header-info-data-status-icon');
+            let accStatTxtEl = document.querySelector('.container-chat--sidemenu-header-info-data-status-text');
+
+            accImgEl.src = advStreams.myUserInfo.photoURL;
+            accNameEl.textContent = advStreams.myUserInfo.name;
+            accStatTxtEl.textContent = '[' + user.userInfo.roles + '] ' + user.userInfo.status;
+            setUserStatusColor(accStatEl, user.userInfo.status);
         }
     });
     // Iterate through Registered users

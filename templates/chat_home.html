@@ -2,7 +2,7 @@
 {% block page_description %}Conecta Chat, Mensajes de Texto por Chat, Mensajes{% endblock %}
 {% block page_title %}Conecta Chat{% endblock %}
 {% block body %}
-<main class="s-main-content s-main-content--extend-tab-color-primary mdc-top-app-bar--fixed-adjust">
+<main class="s-main-content s-main-content--extend-tab-color-primary">
     <div class="container-avcalls container--hidden">
         <div class="container-avcalls--canvas">
             <div class="container-avcalls--callerid s-font-align-center">
@@ -106,7 +106,8 @@
                                 </span>
                                 <span class="container-chat--body-message-message-time mdc-typography--caption s-font-color-on-surface"></span>
                                 <span class="container-chat--body-message-message container-elevation-s' s-font-color-on-secondary">
-                                    Si tienes información que consideras puede ayudarnos a asistirte mejor, escribenos un mensaje.
+                                    Si tienes información que consideras puede ayudarnos a asistirte mejor, escribenos
+                                    un mensaje. Tu información es confidencial.
                                 </span>
                                 <span class="container-chat--body-message-message-time mdc-typography--caption s-font-color-on-surface"></span>
                             </p>
@@ -115,6 +116,9 @@
                                 <div class="s-loader-bounce2"></div>
                                 <div class="s-loader-bounce3"></div>
                             </div>
+                        </div>
+                        <div class="container-chat--body-message-istyping mdc-typography--caption s-font-color-secondary container--hidden">
+                            ... está escribiendo
                         </div>
                     </div>
                     <div

@@ -787,7 +787,7 @@ const drawerEl = document.querySelector('.mdc-drawer');
 const topAppBarEl = document.querySelector('.mdc-top-app-bar');
 const topAppBarNavEl = document.querySelector('.mdc-top-app-bar__navigation-icon');
 if (drawerEl && topAppBarEl) {
-    const mainContentEl = document.querySelector('.s-main-content');
+    const mainContentEl = document.querySelector('.mdc-drawer-app-content');
     const drawerItemsEl = document.querySelector('.mdc-drawer__content .mdc-list');
 
     const topAppBar = MDCTopAppBar.attachTo(topAppBarEl);
@@ -846,7 +846,7 @@ if (drawerEl && topAppBarEl) {
     });
 } else if (topAppBarEl) {
     const topAppBar = MDCTopAppBar.attachTo(topAppBarEl);
-    const mainContentEl = document.querySelector('.s-main-content');
+    const mainContentEl = document.querySelector('.mdc-drawer-app-content');
 
     topAppBar.setScrollTarget(mainContentEl);
     topAppBarNavEl.classList.add("mdc-top-app-bar__navigation-icon--hidden");
