@@ -83,7 +83,14 @@ export function accountRedirect(e) {
     } else if (e.detail.index == 1) {
         // Log Out User
         firebase.auth().signOut().then(function() {
-            // Sign-out successful.
+            // Firebase Sign-out successful. Proceed to close sessions
+            // SocketIO disconnect session
+            console.log('Signing out...');
+            if (socket) {
+                console.log('Socket connection found. Ready to disconnect');
+                socket.emit('disconnect');
+            }
+            // Flask Session Sign Out
             window.location.href = '/logoutuser/';
         }).catch(function(error) {
             // An error happened.

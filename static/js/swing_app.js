@@ -116,6 +116,19 @@ export function postFetch(url, postData) {
 }
 
 
+// iOS Freeze/Rubberband Scrolling Prevention
+var appContentEl = document.querySelector('.mdc-drawer-app-content');
+if (appContentEl) {
+    appContentEl.addEventListener('touchstart', (e) => {
+        if (appContentEl.scrollTop === 0) {
+            appContentEl.scrollTop += 1;
+        } else if(appContentEl.scrollTop + appContentEl.offsetHeight >= appContentEl.scrollHeight) {
+            appContentEl.scrollTop -= 1;
+        }
+    });
+}
+
+
 // Play/Stop Audio File
 Audio.prototype.stop = function() {
     this.pause();
@@ -671,14 +684,14 @@ export function initSnackbar(sb, initObject) {
     sb.labelText = initObject.message;
     sb.actionButtonText = initObject.actionText;
     sb.setTimeoutMs = initObject.timeout;
+    if (sb.isOpen) {
+        sb.close('New snackbar initialization...');
+    }
     sb.listen('MDCSnackbar:closed', (evt) => {
         if (evt.detail.reason == 'action') {
             initObject.actionHandler();
         }
     });
-    if (sb.isOpen) {
-        sb.close('New snackbar initialization...');
-    }
     sb.open();
 }
 /* Allow 'window' context to reference the function */
@@ -817,6 +830,7 @@ if (drawerEl && topAppBarEl) {
 
         const permDrawerList = new MDCList(drawerItemsEl);
         permDrawerList.wrapFocus = true;
+
         return permDrawerList;
     }
 
@@ -936,7 +950,7 @@ if (shareMenuButton != null) {
 }
 
 
-// Material Notched Ouline
+// Material Notched Outline
 var mdcNotchedOutlines = [].map.call(document.querySelectorAll('.mdc-notched-outline'), function (el) {
     return new MDCNotchedOutline(el);
 });
@@ -1093,7 +1107,7 @@ const installSBDataObj = {
 const updateSBDataObj = {
     message: '¡Nuevo contenido disponible!. Click OK para actualizar.',
     actionText: 'OK',
-    timeout: 20000,
+    timeout: 30000,
     actionHandler: () => {
         console.log('Updating app...');
         // Refresh the app

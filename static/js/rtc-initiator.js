@@ -922,7 +922,7 @@ function transferRTCUser() {
 }
 
 // Update RTC User Action Buttons elements
-function updateRTCUserActionButtons(usrStatus) {
+function updateRTCUserActionButtons(usrStatus, usrType) {
     switch (usrStatus) {
         case 'Atendido':
         case 'Atendiendo':
@@ -930,6 +930,14 @@ function updateRTCUserActionButtons(usrStatus) {
             document.querySelector('#videoCall').disabled = false;
             break;
         case 'Disponible':
+            if (usrType == 'emp') {
+                document.querySelector('#audioCall').disabled = false;
+                document.querySelector('#videoCall').disabled = false;
+            } else {
+                document.querySelector('#audioCall').disabled = true;
+                document.querySelector('#videoCall').disabled = true;
+            }
+            break;
         case 'Offline':
         case 'Transferid@':
             document.querySelector('#audioCall').disabled = true;
@@ -960,8 +968,15 @@ function updateRTCUserStatus(id, usrStatus) {
 
         switch (usrStatus) {
             case 'Disponible':
-                ftTextAreaElem.classList.add('mdc-text-field--disabled');
-                ftTextInputElem.disabled = true;
+                if (uType != 'emp') {
+                    tbStatTextElem.classList.remove('s-font-color-secondary');
+                    tbStatTextElem.classList.add('s-font-color-primary');
+                    ftTextAreaElem.classList.remove('mdc-text-field--disabled');
+                    ftTextInputElem.disabled = false;
+                } else {
+                    ftTextAreaElem.classList.add('mdc-text-field--disabled');
+                    ftTextInputElem.disabled = true;
+                }
                 break;
             case 'Offline':
                 tbStatTextElem.classList.remove('s-font-color-primary');
@@ -977,7 +992,7 @@ function updateRTCUserStatus(id, usrStatus) {
         }
         tbStatTextElem.textContent = statusText;
         setUserStatusColor(tbStatIconElem, usrStatus);
-        updateRTCUserActionButtons(usrStatus);
+        updateRTCUserActionButtons(usrStatus, uType);
 
         // If user was Offline and now Online, automatically reconnect
         if (wasOfflineNowOnline && usrStatus == 'Disponible') {
