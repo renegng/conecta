@@ -968,7 +968,7 @@ function updateRTCUserStatus(id, usrStatus) {
 
         switch (usrStatus) {
             case 'Disponible':
-                if (uType != 'emp') {
+                if (uType == 'emp') {
                     tbStatTextElem.classList.remove('s-font-color-secondary');
                     tbStatTextElem.classList.add('s-font-color-primary');
                     ftTextAreaElem.classList.remove('mdc-text-field--disabled');

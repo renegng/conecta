@@ -368,7 +368,7 @@ function startUserMedia(av, state) {
 const failedGetUserMediaSBDataObj = {
     message: 'Por favor habilite el acceso a la cámara y/o micrófono.',
     actionText: 'OK',
-    timeout: 20000,
+    timeout: 10000,
     actionHandler: () => {
         console.log('GetUserMedia Devices Failed...');
     }
@@ -378,7 +378,7 @@ const failedGetUserMediaSBDataObj = {
 const conPeerSBDataObj = {
     message: 'Conectando con usuario...',
     actionText: 'OK',
-    timeout: 5000,
+    timeout: 10000,
     actionHandler: () => {
         console.log('Connecting to user...');
     }
@@ -388,7 +388,7 @@ const conPeerSBDataObj = {
 const disconPeerSBDataObj = {
     message: 'Usuario desconectado.',
     actionText: 'OK',
-    timeout: 5000,
+    timeout: 10000,
     actionHandler: () => {
         console.log('User disconnected.');
     }
@@ -398,7 +398,7 @@ const disconPeerSBDataObj = {
 const transferPeerSBDataObj = {
     message: 'Transfiriendo usuario...',
     actionText: 'OK',
-    timeout: 5000,
+    timeout: 10000,
     actionHandler: () => {
         console.log('Transfering user...');
     }
@@ -670,15 +670,17 @@ export function showTabContent(e) {
 export function initSnackbar(sb, initObject) {
     sb.labelText = initObject.message;
     sb.actionButtonText = initObject.actionText;
-    sb.setTimeoutMs = initObject.timeout;
+    sb.timeoutMs = initObject.timeout;
     if (sb.isOpen) {
         sb.close('New snackbar initialization...');
     }
-    sb.listen('MDCSnackbar:closed', (evt) => {
+    let sbCurrEvent = ((evt) => {
         if (evt.detail.reason == 'action') {
             initObject.actionHandler();
         }
+        sb.unlisten('MDCSnackbar:closed', sbCurrEvent);
     });
+    sb.listen('MDCSnackbar:closed', sbCurrEvent);
     sb.open();
 }
 /* Allow 'window' context to reference the function */
@@ -1070,7 +1072,7 @@ var appIsInstalled = false;
 const installSBDataObj = {
     message: '¿Deseas Instalar nuestra App? (¡Gratis!)',
     actionText: 'Si',
-    timeout: 20000,
+    timeout: 10000,
     actionHandler: () => {
         console.log('Installing app (A2H)...');
         // Show the prompt
@@ -1094,7 +1096,7 @@ const installSBDataObj = {
 const updateSBDataObj = {
     message: '¡Nuevo contenido disponible!. Click OK para actualizar.',
     actionText: 'OK',
-    timeout: 30000,
+    timeout: 10000,
     actionHandler: () => {
         console.log('Updating app...');
         // Refresh the app
