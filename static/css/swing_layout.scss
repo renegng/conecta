@@ -37,8 +37,6 @@ body {
     display: flex;
     font-size: 1rem;
     font-family: stv.$swing-typography-font-family;
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch;
 }
 
 .mdc-drawer-app-content {
@@ -46,6 +44,7 @@ body {
     height: 100vh;
     overflow: auto;
     position: relative;
+    -webkit-overflow-scrolling: touch;
 }
 
 .s-drawer {
