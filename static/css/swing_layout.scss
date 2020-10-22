@@ -33,6 +33,7 @@ body {
 }
 
 body {
+    -webkit-overflow-scrolling: touch;
     background: stv.$swing-theme-background;
     display: flex;
     font-size: 1rem;
