@@ -810,6 +810,10 @@ if (drawerEl && topAppBarEl) {
             drawer.open = false;
         });
 
+        mainContentEl.addEventListener('MDCDrawer:closed', () => {
+            topAppBarNavEl.focus();
+        });
+
         return drawer;
     }
 
