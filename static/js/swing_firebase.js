@@ -48,6 +48,9 @@ if (document.querySelector('#firebaseui-auth-container')) {
     firebaseUI.start('#firebaseui-auth-container', firebaseUIConfig);
 }
 
+// Avoids onAuthStateChanged initializeRTC on Signing Out
+var userSignsOut = false;
+
 // Get Signed-In User info
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -70,7 +73,7 @@ firebase.auth().onAuthStateChanged((user) => {
     }
 
     // When a RTC Connection Intent exists, it executes signaling
-    if (document.querySelector('.container-chat')) {
+    if (document.querySelector('.container-chat') && !userSignsOut) {
         initializeRTC();
     }
 });
@@ -86,7 +89,8 @@ export function accountRedirect(e) {
             // Firebase Sign-out successful. Proceed to close sessions
             // SocketIO disconnect session
             console.log('Signing out...');
-            if (socket) {
+            userSignsOut = true;
+            if (window.socket) {
                 console.log('Socket connection found. Ready to disconnect');
                 socket.emit('disconnect');
             }

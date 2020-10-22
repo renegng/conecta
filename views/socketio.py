@@ -276,19 +276,26 @@ def _updateUsersStatus(js):
         new_usr_status = ''
 
         if status == 'busy':
-            # If user type is an employee, do not update any status
-            if usr_type == 'emp':
-                return
-            new_emp_status = 'Atendiendo'
-            new_usr_status = 'Atendido'
+            # Conversation is between employee and user
+            if usr_type != 'emp':
+                new_emp_status = 'Atendiendo'
+                new_usr_status = 'Atendido'
+            # If user type is an employee, conversation is between employees. Do not update status
+            elif usr_type == 'emp':
+                for empUser in cur_oul.userlist.get('rtc_online_users', {}).get('emp_users'):
+                    if empUser.get('id') == emp_id:
+                        new_emp_status = empUser.get('userInfo', {}).get('status')
+                    elif empUser.get('r_id') == usr_id:
+                        new_usr_status = empUser.get('userInfo', {}).get('status')
+            
         elif status == 'transferred':
             usrsAssigned = 0
             for anonUser in cur_oul.userlist.get('rtc_online_users', {}).get('anon_users'):
-                if anonUser.get('userInfo', {}).get('assignedTo') == emp_id:
+                if anonUser.get('userInfo', {}).get('assignedTo') == emp_id and anonUser.get('r_id') != usr_id:
                     usrsAssigned += 1
             
             for regUser in cur_oul.userlist.get('rtc_online_users', {}).get('reg_users'):
-                if regUser.get('userInfo', {}).get('assignedTo') == emp_id:
+                if regUser.get('userInfo', {}).get('assignedTo') == emp_id and regUser.get('r_id') != usr_id:
                     usrsAssigned += 1
             
             new_emp_status = 'Disponible'

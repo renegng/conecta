@@ -116,19 +116,6 @@ export function postFetch(url, postData) {
 }
 
 
-// iOS Freeze/Rubberband Scrolling Prevention
-var appContentEl = document.querySelector('.mdc-drawer-app-content');
-if (appContentEl) {
-    appContentEl.addEventListener('touchstart', (e) => {
-        if (appContentEl.scrollTop === 0) {
-            appContentEl.scrollTop += 1;
-        } else if(appContentEl.scrollTop + appContentEl.offsetHeight >= appContentEl.scrollHeight) {
-            appContentEl.scrollTop -= 1;
-        }
-    });
-}
-
-
 // Play/Stop Audio File
 Audio.prototype.stop = function() {
     this.pause();
