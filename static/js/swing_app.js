@@ -806,6 +806,13 @@ if (drawerEl && topAppBarEl) {
             drawer.open = !drawer.open;
         });
 
+        drawerItemsEl.addEventListener('click', (event) => {
+            drawer.open = false;
+            drawer.handleScrimClick;
+            mainContentEl.querySelector('input, button').focus();
+            console.log('OnClick Event Listener Executed');
+        });
+
         return drawer;
     }
 
