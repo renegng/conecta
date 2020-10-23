@@ -806,14 +806,6 @@ if (drawerEl && topAppBarEl) {
             drawer.open = !drawer.open;
         });
 
-        drawerItemsEl.addEventListener('click', (event) => {
-            drawer.open = false;
-        });
-
-        document.body.addEventListener('MDCDrawer:closed', () => {
-            mainContentEl.querySelector('input, button').focus();
-        });
-
         return drawer;
     }
 
