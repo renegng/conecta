@@ -795,7 +795,9 @@ if (drawerEl && topAppBarEl) {
     const topAppBar = MDCTopAppBar.attachTo(topAppBarEl);
     topAppBar.setScrollTarget(mainContentEl);
 
+    let isDrawerModal = false;
     const initModalDrawer = () => {
+        isDrawerModal = true;
         drawerEl.classList.add("mdc-drawer--modal");
         topAppBarNavEl.classList.remove("mdc-top-app-bar__navigation-icon--hidden");
 
@@ -806,21 +808,20 @@ if (drawerEl && topAppBarEl) {
             drawer.open = !drawer.open;
         });
 
-        var evClickHref = null;
+        let drawerItemHref = null;
         drawerItemsEl.addEventListener('click', (event) => {
             drawer.open = false;
-            evClickHref = event.target.href;
-            event.preventDefault();
-            console.log('OnClick Event Listener Executed');
+            drawerItemHref = event.target.href;
+            if (isDrawerModal) {
+                event.preventDefault();
+            }
         });
 
         document.body.addEventListener('MDCDrawer:closed', () => {
-            console.log('It is closed... TA-DAAA');
             drawer.handleScrimClick;
             mainContentEl.querySelector('input, button').focus();
-            if (evClickHref) {
-                console.log('Redirecting...');
-                window.location.assign(evClickHref);
+            if (drawerItemHref) {
+                window.location.assign(drawerItemHref);
             }
         });
 
@@ -828,6 +829,7 @@ if (drawerEl && topAppBarEl) {
     }
 
     const initPermanentDrawer = () => {
+        isDrawerModal = false;
         drawerEl.classList.remove("mdc-drawer--modal");
         topAppBarNavEl.classList.add("mdc-top-app-bar__navigation-icon--hidden");
 
