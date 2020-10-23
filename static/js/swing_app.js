@@ -808,6 +808,7 @@ if (drawerEl && topAppBarEl) {
 
         drawerItemsEl.addEventListener('click', (event) => {
             drawer.open = false;
+            drawer.releaseFocus;
         });
 
         document.body.addEventListener('MDCDrawer:closed', () => {
