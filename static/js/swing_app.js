@@ -667,6 +667,7 @@ export function showTabContent(e) {
 
 
 // Snackbar init function
+let sbCurrEvent = null;
 export function initSnackbar(sb, initObject) {
     sb.labelText = initObject.message;
     sb.actionButtonText = initObject.actionText;
@@ -674,11 +675,13 @@ export function initSnackbar(sb, initObject) {
     if (sb.isOpen) {
         sb.close('New snackbar initialization...');
     }
-    let sbCurrEvent = ((evt) => {
+    if (sbCurrEvent) {
+        sb.unlisten('MDCSnackbar:closed', sbCurrEvent);
+    }
+    sbCurrEvent = ((evt) => {
         if (evt.detail.reason == 'action') {
             initObject.actionHandler();
         }
-        sb.unlisten('MDCSnackbar:closed', sbCurrEvent);
     });
     sb.listen('MDCSnackbar:closed', sbCurrEvent);
     sb.open();
