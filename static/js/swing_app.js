@@ -806,18 +806,12 @@ if (drawerEl && topAppBarEl) {
             drawer.open = !drawer.open;
         });
 
-        var drawerItemHref = null;
         drawerItemsEl.addEventListener('click', (event) => {
             drawer.open = false;
-            event.preventDefault();
-            drawerItemHref = event.target.href;
         });
 
         document.body.addEventListener('MDCDrawer:closed', () => {
             mainContentEl.querySelector('input, button').focus();
-            if (drawerItemHref) { 
-                window.location.assign(drawerItemHref);
-            }
         });
 
         return drawer;
