@@ -806,11 +806,22 @@ if (drawerEl && topAppBarEl) {
             drawer.open = !drawer.open;
         });
 
+        var evClickHref = null;
         drawerItemsEl.addEventListener('click', (event) => {
             drawer.open = false;
+            evClickHref = event.target.href;
+            event.stopPropagation();
+            console.log('OnClick Event Listener Executed');
+        });
+
+        document.body.addEventListener('MDCDrawer:closed', () => {
+            console.log('It is closed... TA-DAAA');
             drawer.handleScrimClick;
             mainContentEl.querySelector('input, button').focus();
-            console.log('OnClick Event Listener Executed');
+            if (evClickHref) {
+                console.log('Redirecting...');
+                window.location.assign(evClickHref);
+            }
         });
 
         return drawer;
