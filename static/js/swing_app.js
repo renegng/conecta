@@ -810,8 +810,8 @@ if (drawerEl && topAppBarEl) {
             drawer.open = false;
         });
 
-        mainContentEl.addEventListener('MDCDrawer:closed', () => {
-            topAppBarNavEl.focus();
+        document.body.addEventListener('MDCDrawer:closed', () => {
+            mainContentEl.querySelector('input, button').focus();
         });
 
         return drawer;
