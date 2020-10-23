@@ -810,7 +810,7 @@ if (drawerEl && topAppBarEl) {
         drawerItemsEl.addEventListener('click', (event) => {
             drawer.open = false;
             evClickHref = event.target.href;
-            event.stopPropagation();
+            event.preventDefault();
             console.log('OnClick Event Listener Executed');
         });
 
