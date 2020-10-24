@@ -64,11 +64,6 @@ function initializeRTC () {
 
 // SimplePeer User Connection Class
 class rtcPeerConnection {
-    isInitialSignal;
-    isInitiator;
-    rtcSimplePeer;
-    uListElem;
-
     constructor(init, uListElem) {
         this.isInitiator = init;
         this.uListElem = uListElem;
