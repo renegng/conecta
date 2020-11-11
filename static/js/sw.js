@@ -4,34 +4,40 @@
 
 const filesToPreCache = [
     // Web pages
-    { url: '/', revision: '2020-10-23-2' },
-    { url: '/autocuidado/', revision: '2020-10-23-2' },
-    { url: '/dirservicios/', revision: '2020-10-23-2' },
-    { url: '/login/', revision: '2020-10-23-2' },
-    { url: '/materialesedu/', revision: '2020-10-23-2' },
-    { url: '/planseguridad/', revision: '2020-10-23-2' },
-    { url: '/politicaprivacidad/', revision: '2020-10-23-2' },
-    { url: '/sobrenosotros/', revision: '2020-10-23-2' },
-    { url: '/terminosdelservicio/', revision: '2020-10-23-2' },
-    { url: '/welcome/', revision: '2020-10-23-2' },
+    { url: '/', revision: '2020-11-10-1' },
+    { url: '/autocuidado/', revision: '2020-11-10-1' },
+    { url: '/dirservicios/', revision: '2020-11-10-1' },
+    { url: '/login/', revision: '2020-11-10-1' },
+    { url: '/materialesedu/', revision: '2020-11-10-1' },
+    { url: '/planseguridad/', revision: '2020-11-10-1' },
+    { url: '/politicaprivacidad/', revision: '2020-11-10-1' },
+    { url: '/sobrenosotros/', revision: '2020-11-10-1' },
+    { url: '/terminosdelservicio/', revision: '2020-11-10-1' },
+    { url: '/welcome/', revision: '2020-11-10-1' },
     // Images
-    { url: '/static/images/manifest/agent_f.svg', revision: '2020-10-23-2' },
-    { url: '/static/images/manifest/bid_slogan.png', revision: '2020-10-23-2' },
-    { url: '/static/images/manifest/ciudadmujer.svg', revision: '2020-10-23-2' },
-    { url: '/static/images/manifest/conatel.png', revision: '2020-10-23-2' },
-    { url: '/static/images/manifest/gobhn.svg', revision: '2020-10-23-2' },
-    { url: '/static/images/manifest/icon-512x512.png', revision: '2020-10-23-2' },
-    { url: '/static/images/manifest/inam.svg', revision: '2020-10-23-2' },
-    { url: '/static/images/manifest/user_f.svg', revision: '2020-10-23-2' },
-    { url: '/static/images/manifest/user_f_01.svg', revision: '2020-10-23-2' },
-    { url: '/static/images/manifest/user_f_02.svg', revision: '2020-10-23-2' },
-    { url: '/static/images/manifest/user_f_03.svg', revision: '2020-10-23-2' },
-    { url: '/static/images/manifest/wifi_antenna.svg', revision: '2020-10-23-2' },
+    { url: '/static/images/manifest/agent_f.svg', revision: '2020-11-10-1' },
+    { url: '/static/images/manifest/bid_slogan.png', revision: '2020-11-10-1' },
+    { url: '/static/images/manifest/ciudadmujer.svg', revision: '2020-11-10-1' },
+    { url: '/static/images/manifest/conatel.png', revision: '2020-11-10-1' },
+    { url: '/static/images/manifest/gobhn.svg', revision: '2020-11-10-1' },
+    { url: '/static/images/manifest/icon-512x512.png', revision: '2020-11-10-1' },
+    { url: '/static/images/manifest/inam.svg', revision: '2020-11-10-1' },
+    { url: '/static/images/manifest/user_f.svg', revision: '2020-11-10-1' },
+    { url: '/static/images/manifest/user_f_01.svg', revision: '2020-11-10-1' },
+    { url: '/static/images/manifest/user_f_02.svg', revision: '2020-11-10-1' },
+    { url: '/static/images/manifest/user_f_03.svg', revision: '2020-11-10-1' },
+    { url: '/static/images/manifest/wifi_antenna.svg', revision: '2020-11-10-1' },
     // Audio Files
-    { url: '/static/media/audio/call_connected.mp3', revision: '2020-10-23-2' },
-    { url: '/static/media/audio/call_ended.mp3', revision: '2020-10-23-2' },
-    { url: '/static/media/audio/calling_ring.mp3', revision: '2020-10-23-2' }
+    { url: '/static/media/audio/call_connected.mp3', revision: '2020-11-10-1' },
+    { url: '/static/media/audio/call_ended.mp3', revision: '2020-11-10-1' },
+    { url: '/static/media/audio/calling_ring.mp3', revision: '2020-11-10-1' }
 ];
+
+// Importing Localforage to access localStorage
+importScripts('/static/js/localforage.min.js');
+const swStore = localforage.createInstance({
+    name: 'swingcms-sw'
+});
 
 // Importing Google's Workbox library for ServiceWorker implementation
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js');
@@ -48,10 +54,10 @@ workbox.core.clientsClaim();
 // Configuring Workbox
 workbox.core.setCacheNameDetails({
     prefix: 'conecta',
-    suffix: 'v2020-10-23-2',
+    suffix: 'v2020-11-10-1',
     precache: 'pre-cache',
     runtime: 'run-time',
-    googleAnalytics: 'ga',
+    googleAnalytics: 'ga'
 });
 
 // Install Event and Pre-Cache
@@ -76,6 +82,10 @@ self.addEventListener('activate', event => {
     });
     // Keep the service worker alive until all caches are deleted.
     event.waitUntil(promiseChain);
+});
+// Store Service Worker current version
+swStore.setItem('swVersion', workbox.core.cacheNames.suffix).then( (val) => {
+    console.log('Service Worker version: ' + val);
 });
 
 // Enable Google Analytics Offline

@@ -1,0 +1,176 @@
+{% extends 'layout_main-drawer_footer_topbar.html' %}
+{% block page_description %}Conecta, Busca Apoyo, Apoyo, Contáctanos{% endblock %}
+{% block page_title %}Busca Apoyo{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <article class="s-article">
+        <div class="container-color-background">
+            <div class="mdc-layout-grid container-size-xs">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <div class="mdc-typography--headline2 s-font-color-primary s-font-align-center s-font-family-poppins">
+                            Busca apoyo
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-color-background">
+            <div class="mdc-layout-grid container-size-s">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <img src="{{ url_for('static', filename='images/manifest/group_f_01.svg') }}" class="resize-image-2fit-70" alt="Logo Apoyo" />
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <div class="mdc-typography--headline2 s-font-color-secondary s-font-family-poppins">
+                            Atención a tu alcance
+                        </div>
+                        <p class="mdc-typography--body1 s-font-color-on-background">
+                            Conoce aquí cómo recibir orientación, proteger tus derechos y encontrar información sobre la
+                            denuncia por diferentes medios
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-color-background">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <h4 class="mdc-typography--headline4 s-font-color-primary s-font-align-center s-font-family-poppins">
+                            Canales de comunicación
+                        </h4>
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <div class="mdc-card">
+                            <a href="https://wa.me/50499993298" target="_blank">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="mdc-card__media">
+                                        <i class="fa fa-whatsapp s-font-color-primary" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="mdc-typography--headline5 s-font-color-secondary">Chatea con nosotras</div>
+                                    <div class="mdc-typography--subtitle2">WhatsApp</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <div class="mdc-card">
+                            <a href="/welcome/" target="_blank">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="mdc-card__media">
+                                        <i class="material-icons s-font-color-primary" aria-hidden="true">chat</i>
+                                    </div>
+                                    <div class="mdc-typography--headline5 s-font-color-secondary">Conoce nuestra plataforma</div>
+                                    <div class="mdc-typography--subtitle2">CONECTA</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <div class="mdc-card">
+                            <a href="tel:911" rel="external" target="_blank">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="mdc-card__media">
+                                        <img class="resize-image-2fit-30" src="../static/images/manifest/911.png" alt="Logo 911" style="margin: 0;" />
+                                    </div>
+                                    <div class="mdc-typography--headline5 s-font-color-secondary">Llama al 911</div>
+                                    <div class="mdc-typography--subtitle2">911</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <h4 class="mdc-typography--headline4 s-font-color-primary s-font-align-center s-font-family-poppins">
+                            Visita nuestros Centros Ciudad Mujer
+                        </h4>
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle">
+                        <div class="mdc-card">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media mdc-card__media--16-9"
+                                     style="background-image: url(../static/images/assets/ccm/cmh_choloma_02.jpg);">
+                                </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">CCM Choloma</div>
+                                <div class="mdc-typography--subtitle2">
+                                    Colonia Valle de Sula 3, Sector López Arellano, atrás de la colonia Las Colinas.<br /> Choloma, Cortés.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle">
+                        <div class="mdc-card">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media mdc-card__media--16-9"
+                                     style="background-image: url(../static/images/assets/ccm/cmh_juticalpa_02.jpg);">
+                                </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">CCM Juticalpa</div>
+                                <div class="mdc-typography--subtitle2">
+                                    Residencial Villa Santa, A 3 Kilómetros del desvío a la aldea de la empalizada, carretera que conecta al Municipio de San Francisco de Becerra.<br /> Olancho.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle">
+                        <div class="mdc-card">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media mdc-card__media--16-9"
+                                     style="background-image: url(../static/images/assets/ccm/cmh_kennedy_02.jpg);">
+                                </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">CCM Kennedy</div>
+                                <div class="mdc-typography--subtitle2">
+                                    Colonia Kennedy, 2da. entrada, 1 cuadra antes del Estadio Emilio Larach.<br /> Tegucigalpa.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle">
+                        <div class="mdc-card">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media mdc-card__media--16-9"
+                                     style="background-image: url(../static/images/assets/ccm/cmh_laceiba.jpg);">
+                                </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">CCM La Ceiba</div>
+                                <div class="mdc-typography--subtitle2">
+                                    Entrada a Colonia La Florida, calle de la Escuela Bilingue Brassavola a un costado de: Cámara de Comercio e Industrias de Atlántida.<br /> La Ceiba, Atlántida.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle">
+                        <div class="mdc-card">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media mdc-card__media--16-9"
+                                     style="background-image: url(../static/images/assets/ccm/cmh_sanpedrosula.jpg);">
+                                </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">CCM San Pedro Sula</div>
+                                <div class="mdc-typography--subtitle2">
+                                    Col. Municipal, sector Calpules, al este de la Ciudad de San Pedro Sula, contiguo a la Escuela Froylan Turcios.<br /> San Pedro Sula, Cortés.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle">
+                        <div class="mdc-card">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media mdc-card__media--16-9"
+                                     style="background-image: url(../static/images/assets/ccm/cmh_movil_02.jpg);">
+                                </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Ciudad Mujer Móvil</div>
+                                <div class="mdc-typography--subtitle2">
+                                    Cofradía, Cortés <br /> Colonia la Pradera, San Pedro Sula <br /> Naco, Cortés
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</main>
+{% endblock %}

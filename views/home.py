@@ -20,6 +20,12 @@ def _autocuidado():
     return render_template('autocuidado.html')
 
 
+@home.route('/buscaapoyo/')
+def _buscaapoyo():
+    app.logger.debug('** SWING_CMS ** - Busca Apoyo')
+    return render_template('buscaapoyo.html')
+
+
 @home.route('/chat/')
 def _chat():
     app.logger.debug('** SWING_CMS ** - Try Chat')
@@ -52,6 +58,12 @@ def _chat_home():
 def _components():
     app.logger.debug('** SWING_CMS ** - Components')
     return render_template('components.html')
+
+
+@home.route('/citas/crear/')
+def _citas_crear():
+    app.logger.debug('** SWING_CMS ** - Crear Citas')
+    return render_template('citas_crear.html')
 
 
 @home.route('/coronavirus/')

@@ -75,6 +75,32 @@
                             <i class="material-icons container-chat--sidemenu-header-info-data-status-icon s-font-color-chat-offline">
                                 stop_circle
                             </i>
+                            <div class="container-chat--sidemenu-header-info-data-status-menu mdc-menu-surface--anchor">
+                                <div id="accountStatus" class="mdc-menu mdc-menu-surface" tabindex="-1">
+                                    <div class="mdc-typography--subtitle2 s-font-color-secondary s-menu-subtitle">
+                                        Selecciona tu estado:</div>
+                                    <ul class="mdc-list mdc-menu__items" role="menu" aria-hidden="true">
+                                        <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                            <span class="mdc-list-item__ripple"></span>
+                                            <i class="material-icons mdc-list-item__graphic s-font-color-chat-online"
+                                                aria-hidden="true">stop_circle</i>
+                                            <span class="mdc-list-item__text">Disponible</span>
+                                        </li>
+                                        <li class="mdc-list-item" role="menuitem" tabindex="1">
+                                            <span class="mdc-list-item__ripple"></span>
+                                            <i class="material-icons mdc-list-item__graphic s-font-color-chat-away"
+                                                aria-hidden="true">stop_circle</i>
+                                            <span class="mdc-list-item__text">En receso</span>
+                                        </li>
+                                        <li class="mdc-list-item" role="menuitem" tabindex="2">
+                                            <span class="mdc-list-item__ripple"></span>
+                                            <i class="material-icons mdc-list-item__graphic s-font-color-chat-away"
+                                                aria-hidden="true">stop_circle</i>
+                                            <span class="mdc-list-item__text">En reunión</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                             <div class="container-chat--sidemenu-header-info-data">
                                 <span class="container-chat--sidemenu-header-info-data-name mdc-typography--body1 s-font-color-primary">
                                     - -
@@ -212,7 +238,7 @@
                                                 <i class="s-font-color-secondary material-icons mdc-list-item__graphic"  aria-hidden="true">
                                                     exit_to_app
                                                 </i>
-                                                <span class="mdc-list-item__text">Finalizar Chat</span>
+                                                <span class="mdc-list-item__text">Finalizar atención</span>
                                             </li>
                                             <hr class="mdc-list-divider s-mdc-list-divider">
                                             <li class="mdc-list-item" role="menuitem" tabindex="2">
@@ -220,7 +246,7 @@
                                                 <i class="s-font-color-secondary material-icons mdc-list-item__graphic"  aria-hidden="true">
                                                     cancel
                                                 </i>
-                                                <span class="mdc-list-item__text">Cerrar Conexión</span>
+                                                <span class="mdc-list-item__text">Cerrar conexión</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -319,6 +345,27 @@
                             data-action-type="submit" data-action-fn="transferRTCUser">
                         <div class="mdc-button__ripple"></div>
                         <span class="mdc-button__label">Transferir</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
+    <div id="disconnected-dialog" class="mdc-dialog">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="d-disconnected-title"
+                aria-describedby="d-disconnected-content">
+                <h2 class="mdc-dialog__title" id="d-disconnected-title">Sesión desconectada</h2>
+                <div class="mdc-dialog__content" id="d-disconnected-content">
+                    Su sesión ha perdido conexión por inactividad (<span id="d-disconnected-inactivity"
+                        class="s-font-color-primary"></span> segundos inactivos). Presione OK para reiniciar la
+                    conexión.
+                </div>
+                <div class="mdc-dialog__actions">
+                    <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="accept"
+                        data-action-type="redirect" data-action-val="/chat/admin/" data-mdc-dialog-button-default>
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">OK</span>
                     </button>
                 </div>
             </div>

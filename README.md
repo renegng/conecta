@@ -127,6 +127,8 @@ Proper credit for the following people/teams:
 - Polymer Project, for an amazing main HTML PWA Template structure.
 - Python, Flask, NodeJS, SQLAlchemy, Migrate, Alembic, WTForms, Login, GitHub and everyone's amazing frameworks.
 - PeerJS, simple-peer, SaltyRTC for their wonderful frameworks to implement WebRTC.
+- Localforage for their simple and amazing localStorage wrapper.
+- jsCalendar for their amazing simple modern calendar library.
 - Traversy Media, for incredible tips & tricks overall.
 - Visual Studio Code, for an incredible IDE.
 - Twitter Twemoji for the amazing emojis.
