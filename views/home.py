@@ -1,6 +1,6 @@
-import datetime
-
 from . import auth, createCookieSession, createLoginSession, createJsonResponse, db, getUserRedirectURL, isUserLoggedInRedirect
+from datetime import datetime as dt
+from datetime import timezone as tz
 from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
@@ -24,6 +24,20 @@ def _autocuidado():
 def _buscaapoyo():
     app.logger.debug('** SWING_CMS ** - Busca Apoyo')
     return render_template('buscaapoyo.html')
+
+
+@home.route('/appointments/')
+@login_required
+def _appointments():
+    app.logger.debug('** SWING_CMS ** - Citas')
+    return render_template('appointments.html')
+
+
+@home.route('/appointments/create/')
+@login_required
+def _appointmentscreate():
+    app.logger.debug('** SWING_CMS ** - CrearCitas')
+    return render_template('appointments_create.html')
 
 
 @home.route('/chat/')
@@ -60,12 +74,6 @@ def _components():
     return render_template('components.html')
 
 
-@home.route('/citas/crear/')
-def _citas_crear():
-    app.logger.debug('** SWING_CMS ** - Crear Citas')
-    return render_template('citas_crear.html')
-
-
 @home.route('/coronavirus/')
 def _coronavirus():
     app.logger.debug('** SWING_CMS ** - Coronavirus')
@@ -82,7 +90,7 @@ def _dirservicios():
 @login_required
 def _home():
     app.logger.debug('** SWING_CMS ** - Home')
-    return render_template('acercade.html')
+    return render_template('home.html')
 
 
 @home.route('/login/')
@@ -118,7 +126,7 @@ def _loginuser():
             user.email = fbUser.email
             user.name = fbUser.display_name
             user.phonenumber = fbUser.phone_number
-            user.datecreated = datetime.datetime.utcnow()
+            user.datecreated = dt.now(tz.utc)
             user.cmuserid = 'CON-' + user.name.strip().upper()[0:1] + user.datecreated.strftime('-%y%m%d-%H%M%S')            
             db.session.add(user)
             db.session.flush()

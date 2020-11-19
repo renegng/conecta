@@ -1,16 +1,16 @@
 {% extends 'layout_main-drawer_footer_topbar.html' %}
-{% block page_description %}Contact-Os Citas, Agendar Citas, Crear Citas, Citas{% endblock %}
-{% block page_title %}Contact-Os Crear Citas{% endblock %}
+{% block page_description %}Conecta Crear Citas, Agendar Citas, Crear Citas, Citas{% endblock %}
+{% block page_title %}Conecta Crear Citas{% endblock %}
 {% block head_section %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jsCalendar.css') }}">
 {% endblock %}
 {% block body %}
-<main class="s-main-content container-color-surface">
+<main class="s-main-content container-color-background">
     <div class="mdc-layout-grid container-size-xs">
         <div class="mdc-layout-grid__inner">
             <header class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
-                <img src="{{ url_for('static', filename='images/manifest/appointment.svg') }}" class="resize-image-2fit-30" alt="Logo Citas" />
+                <img src="{{ url_for('static', filename='images/manifest/calendar.svg') }}" class="resize-image-2fit-30" alt="Logo Citas" />
                 <div class="mdc-typography--headline2 s-font-color-primary">
                     Solicita tu cita.
                 </div>
@@ -34,19 +34,24 @@
                     </div>
                     <div class="mdc-select__menu mdc-menu mdc-menu-surface" role="listbox">
                         <ul class="mdc-list mdc-select__list">
-                            <li class="mdc-list-item" data-value="assistance">
+                            <li class="mdc-list-item" data-value="psi">
                                 <span class="mdc-list-item__text">
-                                    Asistencia
+                                    Apoyo psicológico
                                 </span>
                             </li>
-                            <li class="mdc-list-item" data-value="legal">
+                            <li class="mdc-list-item" data-value="soc">
                                 <span class="mdc-list-item__text">
-                                    Legal
+                                    Apoyo social
                                 </span>
                             </li>
-                            <li class="mdc-list-item" data-value="support">
+                            <li class="mdc-list-item" data-value="abo">
                                 <span class="mdc-list-item__text">
-                                    Orientación
+                                    Asistencia legal
+                                </span>
+                            </li>
+                            <li class="mdc-list-item" data-value="gaa">
+                                <span class="mdc-list-item__text">
+                                    Grupos de autoayuda
                                 </span>
                             </li>
                         </ul>

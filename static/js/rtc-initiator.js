@@ -74,6 +74,12 @@ function initializeRTC () {
         console.log('Received Heartbeat');
         console.log(data);
     });
+
+    // Receive Conversation ID
+    socket.on('receiveConversation', (data) => {
+        console.log('Conversation Info Retrieved');
+        console.log(data);
+    });
 }
 
 // SimplePeer User Connection Class
@@ -88,21 +94,19 @@ class rtcPeerConnection {
                 iceServers: [
                     {
                         urls: [
-                            // 'stun:global.stun.twilio.com:3478',
-                            'stun:stun.l.google.com:19302'
+                            'stun:stun.rxdbit.com'
                         ]
                     },{
                         urls: [
-                            // 'turn:relay.backups.cz?transport=tcp',
-                            'turn:relay.backups.cz'
+                            'turn:turn.rxdbit.com'
                         ],
-                        credential: 'webrtc',
-                        username: 'webrtc'
+                        credential: 'cotnection',
+                        username: 'cotusr'
                     }
                 ]
             },
             initiator: this.isInitiator,
-            trickle: false
+            trickle: true
         });
 
         this.rtcSimplePeer.on('signal', (data) => {
@@ -226,7 +230,17 @@ class rtcPeerConnection {
                         'e_id' : swcms.advStreams.myUserInfo.id,
                         's_type' : 'busy',
                         'u_id' : this.uListElem.getAttribute('data-meta-rid'),
-                        'u_type' : this.uListElem.getAttribute('data-meta-utype') 
+                        'u_type' : utype
+                    }));
+                    socket.emit('getConversation', JSON.stringify({
+                        'u_id' : uid,
+                        'u_ip' : '' + this.uListElem.getAttribute('data-meta-ip'),
+                        'u_type' : utype,
+                        'u_name' : '' + this.uListElem.querySelector('.mdc-list-item__primary-text').textContent,
+                        'u_photoURL' : upic,
+                        'e_id' : swcms.advStreams.myUserInfo.id,
+                        'e_name' : '' + swcms.advStreams.myUserInfo.name,
+                        'e_photoURL' : swcms.advStreams.myUserInfo.photoURL
                     }));
                     break;
             }

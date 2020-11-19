@@ -4,33 +4,25 @@
 
 const filesToPreCache = [
     // Web pages
-    { url: '/', revision: '2020-11-12-1' },
-    { url: '/autocuidado/', revision: '2020-11-12-1' },
-    { url: '/dirservicios/', revision: '2020-11-12-1' },
-    { url: '/login/', revision: '2020-11-12-1' },
-    { url: '/materialesedu/', revision: '2020-11-12-1' },
-    { url: '/planseguridad/', revision: '2020-11-12-1' },
-    { url: '/politicaprivacidad/', revision: '2020-11-12-1' },
-    { url: '/sobrenosotros/', revision: '2020-11-12-1' },
-    { url: '/terminosdelservicio/', revision: '2020-11-12-1' },
-    { url: '/welcome/', revision: '2020-11-12-1' },
+    { url: '/politicaprivacidad/', revision: '2020-11-19-1' },
+    { url: '/terminosdelservicio/', revision: '2020-11-19-1' },
     // Images
-    { url: '/static/images/manifest/agent_f.svg', revision: '2020-11-12-1' },
-    { url: '/static/images/manifest/bid_slogan.png', revision: '2020-11-12-1' },
-    { url: '/static/images/manifest/ciudadmujer.svg', revision: '2020-11-12-1' },
-    { url: '/static/images/manifest/conatel.png', revision: '2020-11-12-1' },
-    { url: '/static/images/manifest/gobhn.svg', revision: '2020-11-12-1' },
-    { url: '/static/images/manifest/icon-512x512.png', revision: '2020-11-12-1' },
-    { url: '/static/images/manifest/inam.svg', revision: '2020-11-12-1' },
-    { url: '/static/images/manifest/user_f.svg', revision: '2020-11-12-1' },
-    { url: '/static/images/manifest/user_f_01.svg', revision: '2020-11-12-1' },
-    { url: '/static/images/manifest/user_f_02.svg', revision: '2020-11-12-1' },
-    { url: '/static/images/manifest/user_f_03.svg', revision: '2020-11-12-1' },
-    { url: '/static/images/manifest/wifi_antenna.svg', revision: '2020-11-12-1' },
+    { url: '/static/images/manifest/agent_f.svg', revision: '2020-11-19-1' },
+    { url: '/static/images/manifest/bid_slogan.png', revision: '2020-11-19-1' },
+    { url: '/static/images/manifest/ciudadmujer.svg', revision: '2020-11-19-1' },
+    { url: '/static/images/manifest/conatel.png', revision: '2020-11-19-1' },
+    { url: '/static/images/manifest/gobhn.svg', revision: '2020-11-19-1' },
+    { url: '/static/images/manifest/icon-512x512.png', revision: '2020-11-19-1' },
+    { url: '/static/images/manifest/inam.svg', revision: '2020-11-19-1' },
+    { url: '/static/images/manifest/user_f.svg', revision: '2020-11-19-1' },
+    { url: '/static/images/manifest/user_f_01.svg', revision: '2020-11-19-1' },
+    { url: '/static/images/manifest/user_f_02.svg', revision: '2020-11-19-1' },
+    { url: '/static/images/manifest/user_f_03.svg', revision: '2020-11-19-1' },
+    { url: '/static/images/manifest/wifi_antenna.svg', revision: '2020-11-19-1' },
     // Audio Files
-    { url: '/static/media/audio/call_connected.mp3', revision: '2020-11-12-1' },
-    { url: '/static/media/audio/call_ended.mp3', revision: '2020-11-12-1' },
-    { url: '/static/media/audio/calling_ring.mp3', revision: '2020-11-12-1' }
+    { url: '/static/media/audio/call_connected.mp3', revision: '2020-11-19-1' },
+    { url: '/static/media/audio/call_ended.mp3', revision: '2020-11-19-1' },
+    { url: '/static/media/audio/calling_ring.mp3', revision: '2020-11-19-1' }
 ];
 
 // Importing Localforage to access localStorage
@@ -54,7 +46,7 @@ workbox.core.clientsClaim();
 // Configuring Workbox
 workbox.core.setCacheNameDetails({
     prefix: 'conecta',
-    suffix: 'v2020-11-12-1',
+    suffix: 'v2020-11-19-1',
     precache: 'pre-cache',
     runtime: 'run-time',
     googleAnalytics: 'ga'
@@ -69,6 +61,7 @@ self.addEventListener('activate', event => {
         let validCacheSet = new Set(Object.values(workbox.core.cacheNames));
         validCacheSet.add('conecta-webfonts');
         validCacheSet.add('conecta-css_js');
+        validCacheSet.add('conecta-pages');
         validCacheSet.add('conecta-img');
 
         return Promise.all(
@@ -91,6 +84,20 @@ swStore.setItem('swVersion', workbox.core.cacheNames.suffix).then( (val) => {
 // Enable Google Analytics Offline
 workbox.googleAnalytics.initialize();
 
+// Cache for Web Pages
+workbox.routing.registerRoute(
+    ({ request }) => request.mode === 'navigate',
+    new workbox.strategies.NetworkFirst({
+        cacheName: 'conecta-pages',
+        plugins: [
+            // Ensure that only requests that result in a 200 status are cached
+            new workbox.cacheableResponse.CacheableResponsePlugin({
+                statuses: [200],
+            }),
+        ],
+    }),
+);
+
 // Cache for Web Fonts.
 workbox.routing.registerRoute(
     new RegExp(/.*(?:fonts\.googleapis|fonts\.gstatic|cloudflare)\.com/),
@@ -110,7 +117,7 @@ workbox.routing.registerRoute(
 // Cache for Images
 workbox.routing.registerRoute(
     new RegExp('\.(?:png|gif|webp|jpg|jpeg|svg)$'),
-    new workbox.strategies.StaleWhileRevalidate({
+    new workbox.strategies.CacheFirst({
         cacheName: 'conecta-img',
         plugins: [
             new workbox.expiration.ExpirationPlugin({

@@ -40,14 +40,17 @@ window.addEventListener('load', () => {
 function selectAppointmentService(value) {
     let serviceConfirmEl = document.querySelector('.container-appointment-confirm--service');
     switch (value) {
-        case 'assistance':
-            serviceConfirmEl.textContent = 'Asistencia';
+        case 'psi':
+            serviceConfirmEl.textContent = 'Apoyo psicológico';
             break;
-        case 'legal':
-            serviceConfirmEl.textContent = 'Legal';
+        case 'soc':
+            serviceConfirmEl.textContent = 'Apoyo social';
             break;
-        case 'support':
-            serviceConfirmEl.textContent = 'Orientación';
+        case 'abo':
+            serviceConfirmEl.textContent = 'Asistencia legal';
+            break;
+        case 'gaa':
+            serviceConfirmEl.textContent = 'Grupos de autoayuda';
             break;
     }
 }
