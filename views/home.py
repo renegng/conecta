@@ -36,8 +36,15 @@ def _appointments():
 @home.route('/appointments/create/')
 @login_required
 def _appointmentscreate():
-    app.logger.debug('** SWING_CMS ** - CrearCitas')
+    app.logger.debug('** SWING_CMS ** - Crear Citas')
     return render_template('appointments_create.html')
+
+
+@home.route('/appointments/create/admin/')
+@login_required
+def _appointmentscreateadmin():
+    app.logger.debug('** SWING_CMS ** - Crear Citas')
+    return render_template('appointments_create_admin.html')
 
 
 @home.route('/chat/')
@@ -68,10 +75,10 @@ def _chat_home():
     return render_template('chat_home.html')
 
 
-@home.route('/components/')
-def _components():
-    app.logger.debug('** SWING_CMS ** - Components')
-    return render_template('components.html')
+# @home.route('/components/')
+# def _components():
+#     app.logger.debug('** SWING_CMS ** - Components')
+#     return render_template('components.html')
 
 
 @home.route('/coronavirus/')
