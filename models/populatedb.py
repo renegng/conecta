@@ -119,15 +119,15 @@ def populateServicesCatalog():
 
         # Add Services
         psy_role = CatalogUserRoles.query.filter_by(name_short='psi').first()
-        psychology = CatalogServices(name='Apoyo psicológico', name_short='psi', service_user_role=psy_role)
+        psychology = CatalogServices(name='Apoyo psicológico', name_short='psi', service_user_role=psy_role.id)
         db.session.add(psychology)
 
         law_role = CatalogUserRoles.query.filter_by(name_short='abo').first()
-        lawyer = CatalogServices(name='Asistencia legal', name_short='abo', service_user_role=law_role)
+        lawyer = CatalogServices(name='Asistencia legal', name_short='abo', service_user_role=law_role.id)
         db.session.add(lawyer)
 
         soc_role = CatalogUserRoles.query.filter_by(name_short='soc').first()
-        social = CatalogServices(name='Apoyo social', name_short='soc', service_user_role=soc_role)
+        social = CatalogServices(name='Apoyo social', name_short='soc', service_user_role=soc_role.id)
         db.session.add(social)
 
         groups = CatalogServices(name='Grupos de autoayuda', name_short='gaa')
