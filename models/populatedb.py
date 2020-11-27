@@ -12,9 +12,6 @@ from models import CatalogSurveysAnswerTypes, Surveys, SurveysQuestions
 
 # Initialize Database Populate Function
 def initPopulateDB():
-    # Add Services Catalog
-    populateServicesCatalog()
-
     # Add Surveys Answer Types Catalog
     populateSurveysAnswerTypesCatalog()
 
@@ -26,6 +23,9 @@ def initPopulateDB():
 
     # Add User Roles Catalog
     populateCatalogUserRoles()
+
+    # Add Services Catalog
+    populateServicesCatalog()
 
     # Add Default Users
     populateDefaultUsers()
@@ -118,13 +118,16 @@ def populateServicesCatalog():
         app.logger.debug('** SWING_CMS ** - Populate Catalog Services')
 
         # Add Services
-        psychology = CatalogServices(name='Apoyo psicológico', name_short='psi')
+        psy_role = CatalogUserRoles.query.filter_by(name_short='psi').first()
+        psychology = CatalogServices(name='Apoyo psicológico', name_short='psi', service_user_role=psy_role)
         db.session.add(psychology)
 
-        lawyer = CatalogServices(name='Asistencia legal', name_short='abo')
+        law_role = CatalogUserRoles.query.filter_by(name_short='abo').first()
+        lawyer = CatalogServices(name='Asistencia legal', name_short='abo', service_user_role=law_role)
         db.session.add(lawyer)
 
-        social = CatalogServices(name='Apoyo social', name_short='soc')
+        soc_role = CatalogUserRoles.query.filter_by(name_short='soc').first()
+        social = CatalogServices(name='Apoyo social', name_short='soc', service_user_role=soc_role)
         db.session.add(social)
 
         groups = CatalogServices(name='Grupos de autoayuda', name_short='gaa')

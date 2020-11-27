@@ -46,7 +46,7 @@ class Appointments(db.Model):
     created_for = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     service_id = db.Column(db.Integer, db.ForeignKey('catalog_services.id'), nullable=False)
     service_supp_id = db.Column(db.Integer, db.ForeignKey('services_supplement.id'), nullable=True)
-    emp_assigned = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    emp_assigned = db.Column(db.Integer, db.ForeignKey('user_x_employees_assigned.id'), nullable=False)
     conversation_id = db.Column(db.JSON, nullable=True)
     usr_attendance = db.Column(db.DateTime, nullable=True)
     emp_attendance = db.Column(db.DateTime, nullable=True)
@@ -88,6 +88,7 @@ class CatalogServices(db.Model):
     name_short = db.Column(db.String(6), unique=True, nullable=True)
     break_minutes = db.Column(db.Integer, unique=False, nullable=True, default=15)
     duration_minutes = db.Column(db.Integer, unique=False, nullable=True, default=45)
+    service_user_role = db.Column(db.Integer, db.ForeignKey('catalog_user_roles.id'), nullable=True)
 
     def __repr__(self):
         return jsonify(
@@ -328,7 +329,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(255), unique=False, nullable=False)
     name = db.Column(db.String(300), unique=False, nullable=False)
     cmuserid = db.Column(db.String(20), unique=False, nullable=False)
-    avatar = db.Column(db.String(16), unique=False, nullable=True)
+    birthdate = db.Column(db.DateTime, unique=False, nullable=True)
     phonenumber = db.Column(db.String(20), unique=False, nullable=True)
     notifications = db.Column(db.Boolean, unique=False, nullable=True)
     enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
@@ -365,6 +366,7 @@ class User(UserMixin, db.Model):
             email = self.email,
             name = self.name,
             cmuserid = self.cmuserid,
+            birthdate = self.birthdate,
             phonenumber = self.phonenumber,
             notifications = self.notifications,
             enabled = self.enabled,
@@ -397,6 +399,49 @@ class User(UserMixin, db.Model):
         
         return hasRole
     
+
+# User Additional Information
+class UserExtraInfo(db.Model):
+    __tablename__ = 'user_extra_info'
+    id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    last_names = db.Column(db.String(300), unique=False, nullable=True)
+    names = db.Column(db.String(300), unique=False, nullable=True)
+    avatar = db.Column(db.String(16), unique=False, nullable=True)
+    country = db.Column(db.JSON, unique=False, nullable=True)
+    state = db.Column(db.JSON, unique=False, nullable=True)
+    city = db.Column(db.JSON, unique=False, nullable=True)
+
+    def __repr__(self):
+        return jsonify(
+            id = self.id,
+            names = self.names,
+            last_names = self.last_names,
+            avatar = self.avatar,
+            country = self.country,
+            state = self.state,
+            city = self.city
+        )
+
+
+# User's Employees Assigned Class
+class UserXEmployeeAssigned(db.Model):
+    __tablename__ = 'user_x_employees_assigned'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    service_id = db.Column(db.Integer, db.ForeignKey('catalog_services.id'), nullable=False)
+    employee_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    datecreated = db.Column(db.DateTime, unique=False, nullable=False, index=True, default=dt.now(tz.utc))
+    enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
+
+    def __repr__(self):
+        return jsonify(
+            id = self.id,
+            user_id = self.user_id,
+            service_id = self.service_id,
+            employee_id = self.employee_id,
+            enabled = self.enabled
+        )
+
 
 # User Roles Class
 class UserXRole(db.Model):
