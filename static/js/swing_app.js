@@ -31,7 +31,7 @@ import { Workbox } from 'workbox-window/Workbox.mjs';
 export function returnFormatDate(dateTime, type = '') {
     var dt = new Date(dateTime);
     var year = dt.getFullYear();
-    var month = dt.getMonth();
+    var month = dt.getMonth() + 1; //months starts at 0
     var day = dt.getDate();
     var hours = dt.getHours();
     var min = dt.getMinutes();
