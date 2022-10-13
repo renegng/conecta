@@ -118,11 +118,11 @@ class rtcPeerConnection {
                 iceServers: [
                     {
                         urls: [
-                            'stun:stun.rxdbit.com'
+                            'stun:stun.ciudadmujer.gob.hn'
                         ]
                     },{
                         urls: [
-                            'turn:turn.rxdbit.com'
+                            'turn:turn.ciudadmujer.gob.hn'
                         ],
                         credential: 'cotnection',
                         username: 'cotusr'
